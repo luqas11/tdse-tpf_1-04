@@ -1,0 +1,37 @@
+  task_menu.c (task_menu.h, task_menu_attribute.h) 
+   Non-Blocking Code -> System Modeling
+  
+  task_menu_interface.c (task_menu_interface.h)
+   Non-Blocking Code
+   
+  task_menu_atribute.h
+  
+  Esta hace libreria la cual contiene la definicion de todos
+  los tipos de datos usados en task_menu.c. En este se define
+  como enum todos los evento y estados.
+  Posee la estructura task_menu_dta_t la cual guarda
+  los datos/informacion del sensor en ese momento preciso.
+  Posee la estructura task_menu_motor_dta_t la cual guarda una lista de
+  los datos/informacion de cada motor al momento de setear un valor
+  y volver al menu principal.
+  
+  
+  task_menu.c
+  
+  Esta primero se encarga de incluir las librerias a usar y
+  definir la inicializacion de contadores y retardos posibles.
+  Luego se crea la estructura de datos task_menu_dta_t mecionada anteriormente y una lista
+  de la estructura task_menu_motor_dta_t que va a tener la informacion de los valores de los
+  2 motores.
+  Luego mediante la funcion task_menu_init se encarga de inicializar
+  todas las estructuras.
+  
+  task_menu_update se encarga de actualizar los elementos de la estructura de datos
+  este usa un SWITCH mediante el cual se toman acciones dependiendo del estado
+  que se encuentre p_task_menu_dta. Los casos dentro del switch se encargan de 
+  analizar todos los eventos y tomar las medidas correspondientes para cada caso
+  como el manejo de guardas, transicion de estados y acciones a imprimir en la
+  pantalla del display.
+  
+
+...
