@@ -60,6 +60,10 @@ void Error_Handler(void);
 #define B1_Pin GPIO_PIN_13
 #define B1_GPIO_Port GPIOC
 #define B1_EXTI_IRQn EXTI15_10_IRQn
+#define A5_Pin GPIO_PIN_0
+#define A5_GPIO_Port GPIOC
+#define A4_Pin GPIO_PIN_1
+#define A4_GPIO_Port GPIOC
 #define C_Pin GPIO_PIN_2
 #define C_GPIO_Port GPIOC
 #define ESCAPE_Pin GPIO_PIN_3
@@ -68,10 +72,6 @@ void Error_Handler(void);
 #define ENTER_GPIO_Port GPIOA
 #define A_Pin GPIO_PIN_1
 #define A_GPIO_Port GPIOA
-#define USART_TX_Pin GPIO_PIN_2
-#define USART_TX_GPIO_Port GPIOA
-#define USART_RX_Pin GPIO_PIN_3
-#define USART_RX_GPIO_Port GPIOA
 #define B_Pin GPIO_PIN_4
 #define B_GPIO_Port GPIOA
 #define LD2_Pin GPIO_PIN_5
@@ -80,6 +80,8 @@ void Error_Handler(void);
 #define D12_GPIO_Port GPIOA
 #define D11_Pin GPIO_PIN_7
 #define D11_GPIO_Port GPIOA
+#define A3_Pin GPIO_PIN_0
+#define A3_GPIO_Port GPIOB
 #define D6_Pin GPIO_PIN_10
 #define D6_GPIO_Port GPIOB
 #define D9_Pin GPIO_PIN_7
@@ -88,8 +90,6 @@ void Error_Handler(void);
 #define D7_GPIO_Port GPIOA
 #define D8_Pin GPIO_PIN_9
 #define D8_GPIO_Port GPIOA
-#define D2_Pin GPIO_PIN_10
-#define D2_GPIO_Port GPIOA
 #define TMS_Pin GPIO_PIN_13
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14

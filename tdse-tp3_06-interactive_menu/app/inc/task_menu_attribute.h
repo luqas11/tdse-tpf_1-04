@@ -62,13 +62,7 @@ extern "C" {
  */
 
 /* Events to excite Task Menu */
-typedef enum task_menu_ev {EV_MEN_ENT_IDLE,
-						   EV_MEN_ENT_ACTIVE,
-						   EV_MEN_NEX_IDLE,
-						   EV_MEN_NEX_ACTIVE,
-						   EV_MEN_ESC_IDLE,
-						   EV_MEN_ESC_ACTIVE,
-						   EV_MEN_A_IDLE,
+typedef enum task_menu_ev {EV_MEN_A_IDLE,
 						   EV_MEN_A_ACTIVE,
 						   EV_MEN_B_IDLE,
 						   EV_MEN_B_ACTIVE,
