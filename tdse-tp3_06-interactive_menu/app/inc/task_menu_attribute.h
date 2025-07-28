@@ -62,7 +62,13 @@ extern "C" {
  */
 
 /* Events to excite Task Menu */
-typedef enum task_menu_ev {EV_MEN_A_IDLE,
+typedef enum task_menu_ev {EV_MEN_ENT_IDLE,
+						   EV_MEN_ENT_ACTIVE,
+						   EV_MEN_NEX_IDLE,
+						   EV_MEN_NEX_ACTIVE,
+						   EV_MEN_ESC_IDLE,
+						   EV_MEN_ESC_ACTIVE,
+						   EV_MEN_A_IDLE,
 						   EV_MEN_A_ACTIVE,
 						   EV_MEN_B_IDLE,
 						   EV_MEN_B_ACTIVE,
@@ -70,14 +76,16 @@ typedef enum task_menu_ev {EV_MEN_A_IDLE,
 						   EV_MEN_C_ACTIVE,
 						   EV_MEN_D_IDLE,
 						   EV_MEN_D_ACTIVE,
-						   EV_MEN_ESC_IDLE,
-						   EV_MEN_ESC_ACTIVE,
-						   EV_MEN_ENTER_IDLE,
-						   EV_MEN_ENTER_ACTIVE,
 						   EV_MEN_MODE_IDLE,
 						   EV_MEN_MODE_ACTIVE,
-						   EV_MEN_INCREASE_IDLE,
-						   EV_MEN_INCREASE_ACTIVE} task_menu_ev_t;
+						   EV_MEN_ENTER_IDLE,
+						   EV_MEN_ENTER_ACTIVE,
+						   EV_MEN_ESCAPE_IDLE,
+						   EV_MEN_ESCAPE_ACTIVE,
+						   EV_MEN_COIN_IDLE,
+						   EV_MEN_COIN_ACTIVE,
+						   EV_MEN_DECREASE_IDLE,
+						   EV_MEN_DECREASE_ACTIVE} task_menu_ev_t;
 
 /* State of Task Menu */
 typedef enum task_menu_st {ST_MEN_XX_MOTOR,

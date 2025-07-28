@@ -96,10 +96,11 @@ typedef enum task_sensor_id {ID_BTN_A,
 							 ID_BTN_B,
 							 ID_BTN_C,
 							 ID_BTN_D,
-							 ID_BTN_ESC,
-							 ID_BTN_ENTER,
 							 ID_BTN_MODE,
-							 ID_BTN_INCREASE} task_sensor_id_t;
+							 ID_BTN_ENTER,
+							 ID_BTN_ESCAPE,
+							 ID_BTN_COIN,
+							 ID_BTN_DECREASE} task_sensor_id_t;
 
 typedef struct
 {

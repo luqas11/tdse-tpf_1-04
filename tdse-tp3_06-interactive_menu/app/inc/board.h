@@ -59,45 +59,55 @@ extern "C" {
 /* STM32 Nucleo Boards - 64 Pins */
 #if ((BOARD == NUCLEO_F103RC) || (BOARD == NUCLEO_F401RE) || (BOARD == NUCLEO_F446RE))
 
-#define BTN_A_PIN		Button_A_Pin
-#define BTN_A_PORT		Button_A_GPIO_Port
+#define BTN_A_PIN		A_Pin
+#define BTN_A_PORT		A_GPIO_Port
 #define BTN_A_PRESSED	GPIO_PIN_RESET
 #define BTN_A_HOVER		GPIO_PIN_SET
 
-#define BTN_B_PIN		Button_B_Pin
-#define BTN_B_PORT		Button_B_GPIO_Port
+#define BTN_B_PIN		B_Pin
+#define BTN_B_PORT		B_GPIO_Port
 #define BTN_B_PRESSED	GPIO_PIN_RESET
 #define BTN_B_HOVER		GPIO_PIN_SET
 
-#define BTN_C_PIN		Button_C_Pin
-#define BTN_C_PORT		Button_C_GPIO_Port
+#define BTN_C_PIN		C_Pin
+#define BTN_C_PORT		C_GPIO_Port
 #define BTN_C_PRESSED	GPIO_PIN_RESET
 #define BTN_C_HOVER		GPIO_PIN_SET
 
-#define BTN_D_PIN		Button_D_Pin
-#define BTN_D_PORT		Button_D_GPIO_Port
+#define BTN_D_PIN		D_Pin
+#define BTN_D_PORT		D_GPIO_Port
 #define BTN_D_PRESSED	GPIO_PIN_RESET
 #define BTN_D_HOVER		GPIO_PIN_SET
 
-#define BTN_ESC_PIN		Button_ESCAPE_Pin
-#define BTN_ESC_PORT	Button_ESCAPE_GPIO_Port
-#define BTN_ESC_PRESSED	GPIO_PIN_RESET
-#define BTN_ESC_HOVER	GPIO_PIN_SET
-
-#define BTN_ENTER_PIN		Button_ENTER_Pin
-#define BTN_ENTER_PORT		Button_ENTER_GPIO_Port
-#define BTN_ENTER_PRESSED	GPIO_PIN_RESET
-#define BTN_ENTER_HOVER		GPIO_PIN_SET
-
-#define BTN_MODE_PIN		Button_MODE_Pin
-#define BTN_MODE_PORT		Button_MODE_GPIO_Port
+#define BTN_MODE_PIN		MODE_Pin
+#define BTN_MODE_PORT		MODE_GPIO_Port
 #define BTN_MODE_PRESSED	GPIO_PIN_RESET
 #define BTN_MODE_HOVER		GPIO_PIN_SET
 
-#define BTN_INCREASE_PIN		Button_INCREASE_Pin
-#define BTN_INCREASE_PORT		Button_INCREASE_GPIO_Port
-#define BTN_INCREASE_PRESSED	GPIO_PIN_RESET
-#define BTN_INCREASE_HOVER		GPIO_PIN_SET
+#define BTN_ENTER_PIN		ENTER_Pin
+#define BTN_ENTER_PORT		ENTER_GPIO_Port
+#define BTN_ENTER_PRESSED	GPIO_PIN_RESET
+#define BTN_ENTER_HOVER		GPIO_PIN_SET
+
+#define BTN_ESCAPE_PIN		ESCAPE_Pin
+#define BTN_ESCAPE_PORT		ESCAPE_GPIO_Port
+#define BTN_ESCAPE_PRESSED	GPIO_PIN_RESET
+#define BTN_ESCAPE_HOVER	GPIO_PIN_SET
+
+#define BTN_COIN_PIN		COIN_Pin
+#define BTN_COIN_PORT		COIN_GPIO_Port
+#define BTN_COIN_PRESSED	GPIO_PIN_RESET
+#define BTN_COIN_HOVER		GPIO_PIN_SET
+
+#define BTN_DECREASE_PIN		DECREASE_Pin
+#define BTN_DECREASE_PORT		DECREASE_GPIO_Port
+#define BTN_DECREASE_PRESSED	GPIO_PIN_RESET
+#define BTN_DECREASE_HOVER		GPIO_PIN_SET
+
+#define LED_A_PIN		LD2_Pin
+#define LED_A_PORT		LD2_GPIO_Port
+#define LED_A_ON		GPIO_PIN_SET
+#define LED_A_OFF		GPIO_PIN_RESET
 
 #endif/* STM32 Nucleo Boards - 144 Pins */
 
