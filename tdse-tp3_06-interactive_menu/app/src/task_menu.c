@@ -70,6 +70,9 @@ task_menu_motor_dta_t task_menu_motor_dta_list[] = {
 	{0, 0, 0}
 };
 
+extern ADC_HandleTypeDef hadc1;
+HAL_StatusTypeDef ADC_Poll_Read(uint16_t *value);
+
 #define MENU_DTA_QTY	(sizeof(task_menu_dta)/sizeof(task_menu_dta_t))
 
 /********************** internal functions declaration ***********************/
@@ -83,6 +86,19 @@ uint32_t g_task_menu_cnt;
 volatile uint32_t g_task_menu_tick_cnt;
 
 /********************** external functions definition ************************/
+HAL_StatusTypeDef ADC_Poll_Read(uint16_t *value) {
+	HAL_StatusTypeDef res;
+
+	res=HAL_ADC_Start(&hadc1);
+	if ( HAL_OK==res ) {
+		res=HAL_ADC_PollForConversion(&hadc1, 0);
+		if ( HAL_OK==res ) {
+			*value = HAL_ADC_GetValue(&hadc1);
+		}
+	}
+	return res;
+}
+
 void task_menu_init(void *parameters)
 {
 	task_menu_dta_t *p_task_menu_dta;
@@ -198,6 +214,15 @@ void task_menu_update(void *parameters)
 			switch (p_task_menu_dta->state)
 			{
 				case ST_MEN_XX_MAIN:
+
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_COIN_ACTIVE == p_task_menu_dta->event)){
+
+						uint16_t value;
+						if (HAL_OK==ADC_Poll_Read(&value)) {
+							LOGGER_LOG("%u\n", value * 80);
+						}
+
+					}
 
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER_ACTIVE == p_task_menu_dta->event))
 					{
