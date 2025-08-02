@@ -63,7 +63,7 @@
 
 /********************** internal data declaration ****************************/
 task_menu_dta_t task_menu_dta =
-	{DEL_MEN_XX_MIN, ST_MEN_XX_MAIN, EV_MEN_ENTER_IDLE, false, 0, 0};
+	{DEL_MEN_XX_MIN, ST_MEN_XX_MAIN, EV_MEN_OK_IDLE, false, 0, 0};
 
 task_menu_motor_dta_t task_menu_motor_dta_list[] = {
 	{0, 0, 0},
@@ -224,7 +224,7 @@ void task_menu_update(void *parameters)
 
 					}
 
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER_ACTIVE == p_task_menu_dta->event))
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						p_task_menu_dta->state = ST_MEN_XX_MOTOR;
@@ -268,7 +268,7 @@ void task_menu_update(void *parameters)
 						displayStringWrite(linea2);
 					}
 
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_A_ACTIVE == p_task_menu_dta->event)){
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event)){
 
 						p_task_menu_dta->flag = false;
 						if(p_task_menu_dta->motor_number == 1 ){
@@ -290,7 +290,7 @@ void task_menu_update(void *parameters)
 
 					}
 
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER_ACTIVE == p_task_menu_dta->event))
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						p_task_menu_dta->state = ST_MEN_XX_POWER;
@@ -306,7 +306,7 @@ void task_menu_update(void *parameters)
 				case ST_MEN_XX_POWER:
 
 
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_A_ACTIVE == p_task_menu_dta->event))
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						p_task_menu_dta->state = ST_MEN_XX_SPEED;
@@ -330,7 +330,7 @@ void task_menu_update(void *parameters)
 					    strcat(text_motor,motorStr);
 						displayStringWrite(text_motor);
 					}
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER_ACTIVE == p_task_menu_dta->event))
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						p_task_menu_dta->state = ST_MEN_XX_SET_POWER;
@@ -359,7 +359,7 @@ void task_menu_update(void *parameters)
 
 					}
 
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_A_ACTIVE == p_task_menu_dta->event))
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						displayClear();
@@ -377,7 +377,7 @@ void task_menu_update(void *parameters)
 						}
 					}
 
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER_ACTIVE == p_task_menu_dta->event))
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						p_task_menu_dta->state = ST_MEN_XX_MAIN;
@@ -408,7 +408,7 @@ void task_menu_update(void *parameters)
 					break;
 
 				case ST_MEN_XX_SPEED:
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_A_ACTIVE == p_task_menu_dta->event))
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						p_task_menu_dta->state = ST_MEN_XX_SPIN;
@@ -432,7 +432,7 @@ void task_menu_update(void *parameters)
 					    strcat(text_motor,motorStr);
 						displayStringWrite(text_motor);
 					}
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER_ACTIVE == p_task_menu_dta->event))
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						p_task_menu_dta->state = ST_MEN_XX_SET_SPEED;
@@ -459,7 +459,7 @@ void task_menu_update(void *parameters)
 
 					}
 
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_A_ACTIVE == p_task_menu_dta->event))
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						displayClear();
@@ -483,7 +483,7 @@ void task_menu_update(void *parameters)
 						displayStringWrite(text_speed);
 					}
 
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER_ACTIVE == p_task_menu_dta->event))
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						p_task_menu_dta->state = ST_MEN_XX_MAIN;
@@ -514,7 +514,7 @@ void task_menu_update(void *parameters)
 					break;
 
 				case ST_MEN_XX_SPIN:
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_A_ACTIVE == p_task_menu_dta->event))
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						p_task_menu_dta->state = ST_MEN_XX_POWER;
@@ -538,7 +538,7 @@ void task_menu_update(void *parameters)
 					    strcat(text_motor,motorStr);
 						displayStringWrite(text_motor);
 					}
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER_ACTIVE == p_task_menu_dta->event))
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						p_task_menu_dta->state = ST_MEN_XX_SET_SPIN;
@@ -565,7 +565,7 @@ void task_menu_update(void *parameters)
 
 					}
 
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_A_ACTIVE == p_task_menu_dta->event))
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						displayClear();
@@ -583,7 +583,7 @@ void task_menu_update(void *parameters)
 						}
 					}
 
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER_ACTIVE == p_task_menu_dta->event))
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						p_task_menu_dta->state = ST_MEN_XX_MAIN;
@@ -618,7 +618,7 @@ void task_menu_update(void *parameters)
 
 					p_task_menu_dta->tick  = DEL_MEN_XX_MIN;
 					p_task_menu_dta->state = ST_MEN_XX_MAIN;
-					p_task_menu_dta->event = EV_MEN_ENTER_IDLE;
+					p_task_menu_dta->event = EV_MEN_OK_IDLE;
 					p_task_menu_dta->flag  = false;
 
 					break;

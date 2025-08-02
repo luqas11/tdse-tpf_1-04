@@ -886,3 +886,129 @@ arm-none-eabi-size  tdse-tp3_06-interactive_menu.elf
   22084	    160	   2360	  24604	   601c	tdse-tp3_06-interactive_menu.elf
 Finished building: default.size.stdout
  
+17:20:28 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/app.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/app.d" -MT"app/src/app.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/app.o"
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+arm-none-eabi-gcc "../app/src/task_menu_interface.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu_interface.d" -MT"app/src/task_menu_interface.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu_interface.o"
+arm-none-eabi-gcc "../app/src/task_sensor.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_sensor.d" -MT"app/src/task_sensor.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_sensor.o"
+../app/src/task_menu.c:66:42: error: 'EV_MEN_ENTER_IDLE' undeclared here (not in a function); did you mean 'EV_MEN_MODE_IDLE'?
+   66 |         {DEL_MEN_XX_MIN, ST_MEN_XX_MAIN, EV_MEN_ENTER_IDLE, false, 0, 0};
+      |                                          ^~~~~~~~~~~~~~~~~
+      |                                          EV_MEN_MODE_IDLE
+../app/src/task_menu.c: In function 'task_menu_update':
+../app/src/task_menu.c:227:81: error: 'EV_MEN_ENTER_ACTIVE' undeclared (first use in this function); did you mean 'EV_MEN_MODE_ACTIVE'?
+  227 |                                         if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER_ACTIVE == p_task_menu_dta->event))
+      |                                                                                 ^~~~~~~~~~~~~~~~~~~
+      |                                                                                 EV_MEN_MODE_ACTIVE
+../app/src/task_menu.c:227:81: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [app/src/subdir.mk:34: app/src/task_menu.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:21:05 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+../app/src/task_menu.c:66:42: error: 'EV_MEN_ENTER_IDLE' undeclared here (not in a function); did you mean 'EV_MEN_MODE_IDLE'?
+   66 |         {DEL_MEN_XX_MIN, ST_MEN_XX_MAIN, EV_MEN_ENTER_IDLE, false, 0, 0};
+      |                                          ^~~~~~~~~~~~~~~~~
+      |                                          EV_MEN_MODE_IDLE
+../app/src/task_menu.c: In function 'task_menu_update':
+../app/src/task_menu.c:227:81: error: 'EV_MEN_ENTER_ACTIVE' undeclared (first use in this function); did you mean 'EV_MEN_MODE_ACTIVE'?
+  227 |                                         if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER_ACTIVE == p_task_menu_dta->event))
+      |                                                                                 ^~~~~~~~~~~~~~~~~~~
+      |                                                                                 EV_MEN_MODE_ACTIVE
+../app/src/task_menu.c:227:81: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [app/src/subdir.mk:34: app/src/task_menu.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:22:01 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+../app/src/task_menu.c:66:42: error: 'EV_MEN_ENTER_IDLE' undeclared here (not in a function); did you mean 'EV_MEN_MODE_IDLE'?
+   66 |         {DEL_MEN_XX_MIN, ST_MEN_XX_MAIN, EV_MEN_ENTER_IDLE, false, 0, 0};
+      |                                          ^~~~~~~~~~~~~~~~~
+      |                                          EV_MEN_MODE_IDLE
+make: *** [app/src/subdir.mk:34: app/src/task_menu.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:22:17 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+arm-none-eabi-gcc -o "tdse-tp3_06-interactive_menu.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"E:\Users\Lucas\Git\tdse-tpf_1-04\tdse-tp3_06-interactive_menu\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp3_06-interactive_menu.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: tdse-tp3_06-interactive_menu.elf
+ 
+arm-none-eabi-size  tdse-tp3_06-interactive_menu.elf 
+arm-none-eabi-objdump -h -S tdse-tp3_06-interactive_menu.elf  > "tdse-tp3_06-interactive_menu.list"
+   text	   data	    bss	    dec	    hex	filename
+  22084	    160	   2360	  24604	   601c	tdse-tp3_06-interactive_menu.elf
+Finished building: default.size.stdout
+ 
+Finished building: tdse-tp3_06-interactive_menu.list
+ 
+17:30:20 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/app.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/app.d" -MT"app/src/app.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/app.o"
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+arm-none-eabi-gcc "../app/src/task_menu_interface.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu_interface.d" -MT"app/src/task_menu_interface.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu_interface.o"
+arm-none-eabi-gcc "../app/src/task_sensor.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_sensor.d" -MT"app/src/task_sensor.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_sensor.o"
+../app/src/task_sensor.c:65:10: error: 'EV_MEN_ENTER1_IDLE' undeclared here (not in a function); did you mean 'EV_MEN_ESCAPE_IDLE'?
+   65 |          EV_MEN_ENTER1_IDLE,  EV_MEN_ENTER1_ACTIVE},
+      |          ^~~~~~~~~~~~~~~~~~
+      |          EV_MEN_ESCAPE_IDLE
+../app/src/task_sensor.c:65:31: error: 'EV_MEN_ENTER1_ACTIVE' undeclared here (not in a function); did you mean 'EV_MEN_ESCAPE_ACTIVE'?
+   65 |          EV_MEN_ENTER1_IDLE,  EV_MEN_ENTER1_ACTIVE},
+      |                               ^~~~~~~~~~~~~~~~~~~~
+      |                               EV_MEN_ESCAPE_ACTIVE
+../app/src/task_sensor.c:67:10: error: 'EV_MEN_ENTER2_IDLE' undeclared here (not in a function); did you mean 'EV_MEN_ESCAPE_IDLE'?
+   67 |          EV_MEN_ENTER2_IDLE,  EV_MEN_ENTER2_ACTIVE},
+      |          ^~~~~~~~~~~~~~~~~~
+      |          EV_MEN_ESCAPE_IDLE
+../app/src/task_sensor.c:67:31: error: 'EV_MEN_ENTER2_ACTIVE' undeclared here (not in a function); did you mean 'EV_MEN_ESCAPE_ACTIVE'?
+   67 |          EV_MEN_ENTER2_IDLE,  EV_MEN_ENTER2_ACTIVE},
+      |                               ^~~~~~~~~~~~~~~~~~~~
+      |                               EV_MEN_ESCAPE_ACTIVE
+../app/src/task_sensor.c:69:10: error: 'EV_MEN_ENTER3_IDLE' undeclared here (not in a function); did you mean 'EV_MEN_ESCAPE_IDLE'?
+   69 |          EV_MEN_ENTER3_IDLE,  EV_MEN_ENTER3_ACTIVE},
+      |          ^~~~~~~~~~~~~~~~~~
+      |          EV_MEN_ESCAPE_IDLE
+../app/src/task_sensor.c:69:31: error: 'EV_MEN_ENTER3_ACTIVE' undeclared here (not in a function); did you mean 'EV_MEN_ESCAPE_ACTIVE'?
+   69 |          EV_MEN_ENTER3_IDLE,  EV_MEN_ENTER3_ACTIVE},
+      |                               ^~~~~~~~~~~~~~~~~~~~
+      |                               EV_MEN_ESCAPE_ACTIVE
+../app/src/task_sensor.c:71:10: error: 'EV_MEN_ENTER4_IDLE' undeclared here (not in a function); did you mean 'EV_MEN_ESCAPE_IDLE'?
+   71 |          EV_MEN_ENTER4_IDLE,  EV_MEN_ENTER4_ACTIVE},
+      |          ^~~~~~~~~~~~~~~~~~
+      |          EV_MEN_ESCAPE_IDLE
+../app/src/task_sensor.c:71:31: error: 'EV_MEN_ENTER4_ACTIVE' undeclared here (not in a function); did you mean 'EV_MEN_ESCAPE_ACTIVE'?
+   71 |          EV_MEN_ENTER4_IDLE,  EV_MEN_ENTER4_ACTIVE},
+      |                               ^~~~~~~~~~~~~~~~~~~~
+      |                               EV_MEN_ESCAPE_ACTIVE
+make: *** [app/src/subdir.mk:34: app/src/task_sensor.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:31:01 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+arm-none-eabi-gcc "../app/src/task_menu_interface.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu_interface.d" -MT"app/src/task_menu_interface.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu_interface.o"
+arm-none-eabi-gcc "../app/src/task_sensor.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_sensor.d" -MT"app/src/task_sensor.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_sensor.o"
+../app/src/task_menu.c: In function 'task_menu_update':
+../app/src/task_menu.c:271:81: error: 'EV_MEN_A_ACTIVE' undeclared (first use in this function); did you mean 'EV_MEN_OK_ACTIVE'?
+  271 |                                         if ((true == p_task_menu_dta->flag) && (EV_MEN_A_ACTIVE == p_task_menu_dta->event)){
+      |                                                                                 ^~~~~~~~~~~~~~~
+      |                                                                                 EV_MEN_OK_ACTIVE
+../app/src/task_menu.c:271:81: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [app/src/subdir.mk:34: app/src/task_menu.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:31:45 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+arm-none-eabi-gcc -o "tdse-tp3_06-interactive_menu.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"E:\Users\Lucas\Git\tdse-tpf_1-04\tdse-tp3_06-interactive_menu\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp3_06-interactive_menu.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: tdse-tp3_06-interactive_menu.elf
+ 
+arm-none-eabi-size  tdse-tp3_06-interactive_menu.elf 
+arm-none-eabi-objdump -h -S tdse-tp3_06-interactive_menu.elf  > "tdse-tp3_06-interactive_menu.list"
+   text	   data	    bss	    dec	    hex	filename
+  22084	    160	   2360	  24604	   601c	tdse-tp3_06-interactive_menu.elf
+Finished building: default.size.stdout
+ 
+Finished building: tdse-tp3_06-interactive_menu.list
+ 
