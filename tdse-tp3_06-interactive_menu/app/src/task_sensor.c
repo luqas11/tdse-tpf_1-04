@@ -77,14 +77,11 @@ const task_sensor_cfg_t task_sensor_cfg_list[] = {
 	 EV_MEN_ESCAPE_IDLE,  EV_MEN_ESCAPE_ACTIVE},
 	{ID_BTN_COIN,  BTN_COIN_PORT,  BTN_COIN_PIN,  BTN_COIN_PRESSED, DEL_BTN_XX_MAX,
 	 EV_MEN_COIN_IDLE,  EV_MEN_COIN_ACTIVE},
-	{ID_BTN_DECREASE,  BTN_DECREASE_PORT,  BTN_DECREASE_PIN,  BTN_DECREASE_PRESSED, DEL_BTN_XX_MAX,
-	 EV_MEN_DECREASE_IDLE,  EV_MEN_DECREASE_ACTIVE},
 };
 
 #define SENSOR_CFG_QTY	(sizeof(task_sensor_cfg_list)/sizeof(task_sensor_cfg_t))
 
 task_sensor_dta_t task_sensor_dta_list[] = {
-	{DEL_BTN_XX_MIN, ST_BTN_XX_UP, EV_BTN_XX_UP},
 	{DEL_BTN_XX_MIN, ST_BTN_XX_UP, EV_BTN_XX_UP},
 	{DEL_BTN_XX_MIN, ST_BTN_XX_UP, EV_BTN_XX_UP},
 	{DEL_BTN_XX_MIN, ST_BTN_XX_UP, EV_BTN_XX_UP},

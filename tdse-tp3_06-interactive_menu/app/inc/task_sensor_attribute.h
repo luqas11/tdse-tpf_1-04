@@ -99,8 +99,7 @@ typedef enum task_sensor_id {ID_BTN_ENTER1,
 							 ID_BTN_MODE,
 							 ID_BTN_OK,
 							 ID_BTN_ESCAPE,
-							 ID_BTN_COIN,
-							 ID_BTN_DECREASE} task_sensor_id_t;
+							 ID_BTN_COIN} task_sensor_id_t;
 
 typedef struct
 {

@@ -65,9 +65,11 @@
 task_menu_dta_t task_menu_dta =
 	{DEL_MEN_XX_MIN, ST_MEN_XX_MAIN, EV_MEN_OK_IDLE, false, 0, 0};
 
-task_menu_motor_dta_t task_menu_motor_dta_list[] = {
-	{0, 0, 0},
-	{0, 0, 0}
+task_menu_drink_dta_t task_menu_drink_dta_list[] = {
+	{0, 0},
+	{0, 0},
+	{0, 0},
+	{0, 0}
 };
 
 extern ADC_HandleTypeDef hadc1;
@@ -139,15 +141,17 @@ void task_menu_init(void *parameters)
 	char linea2[32];
 
 
-	sprintf(linea1, "MOTOR 1: %s,%d,%c",
-	        (task_menu_motor_dta_list[0].power_value ? "ON" : "OFF"),
-			task_menu_motor_dta_list[0].speed_value,
-	        (task_menu_motor_dta_list[0].spin_value ? 'R' : 'L'));
+	sprintf(linea1, "Stocks: %d,%d,%d,%d",
+			task_menu_drink_dta_list[0].stock_value,
+			task_menu_drink_dta_list[1].stock_value,
+			task_menu_drink_dta_list[2].stock_value,
+			task_menu_drink_dta_list[3].stock_value);
 
-	sprintf(linea2, "MOTOR 2: %s,%d,%c",
-	        (task_menu_motor_dta_list[1].power_value ? "ON" : "OFF"),
-			task_menu_motor_dta_list[1].speed_value,
-	        (task_menu_motor_dta_list[1].spin_value ? 'R' : 'L'));
+	sprintf(linea2, "Prices: %d,%d,%d,%d",
+			task_menu_drink_dta_list[0].price_value,
+			task_menu_drink_dta_list[1].price_value,
+			task_menu_drink_dta_list[2].price_value,
+			task_menu_drink_dta_list[3].price_value);
 
 	displayClear();
     displayCharPositionWrite(0, 0);
@@ -155,14 +159,12 @@ void task_menu_init(void *parameters)
     displayCharPositionWrite(0, 1);
 	displayStringWrite(linea2);
 
-
-
 	g_task_menu_tick_cnt = G_TASK_MEN_TICK_CNT_INI;
 }
 
 void task_menu_update(void *parameters)
 {
-	task_menu_motor_dta_t *p_task_menu_motor_dta;
+	task_menu_drink_dta_t *p_task_menu_drink_dta;
 	task_menu_dta_t *p_task_menu_dta;
 	bool b_time_update_required = false;
 
@@ -224,238 +226,119 @@ void task_menu_update(void *parameters)
 
 					}
 
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_MOTOR;
+						p_task_menu_dta->state = ST_MEN_XX_STOCK;
+						p_task_menu_dta->drink_number = 0;
 						displayClear();
 					    displayCharPositionWrite(0, 0);
-						displayStringWrite("ENTER/ NEXT/ ESCAPE");
+						displayStringWrite("> BEBIDA 1");
 					    displayCharPositionWrite(0, 1);
-					    char text_motor[20] = "> MOTOR ";
-					    char motorStr[12];
-					    sprintf(motorStr, "%d", p_task_menu_dta->motor_number + 1);
-					    strcat(text_motor,motorStr);
-						displayStringWrite(text_motor);
+						displayStringWrite("> Stock");
+					}
+
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER2_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_STOCK;
+						p_task_menu_dta->drink_number = 1;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						displayStringWrite("> BEBIDA 2");
+					    displayCharPositionWrite(0, 1);
+						displayStringWrite("> Stock");
+					}
+
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER3_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_STOCK;
+						p_task_menu_dta->drink_number = 2;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						displayStringWrite("> BEBIDA 3");
+					    displayCharPositionWrite(0, 1);
+						displayStringWrite("> Stock");
+					}
+
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER4_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_STOCK;
+						p_task_menu_dta->drink_number = 3;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						displayStringWrite("> BEBIDA 4");
+					    displayCharPositionWrite(0, 1);
+						displayStringWrite("> Stock");
 					}
 
 					break;
 
-				case ST_MEN_XX_MOTOR:
-
+				case ST_MEN_XX_STOCK:
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_ESCAPE_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						p_task_menu_dta->state = ST_MEN_XX_MAIN;
-
 						char linea1[32];
 						char linea2[32];
 
+						sprintf(linea1, "Stocks: %d,%d,%d,%d",
+								task_menu_drink_dta_list[0].stock_value,
+								task_menu_drink_dta_list[1].stock_value,
+								task_menu_drink_dta_list[2].stock_value,
+								task_menu_drink_dta_list[3].stock_value);
 
-						sprintf(linea1, "MOTOR 1: %s,%d,%c",
-						        (task_menu_motor_dta_list[0].power_value ? "ON" : "OFF"),
-								task_menu_motor_dta_list[0].speed_value,
-						        (task_menu_motor_dta_list[0].spin_value ? 'R' : 'L'));
+						sprintf(linea2, "Prices: %d,%d,%d,%d",
+								task_menu_drink_dta_list[0].price_value,
+								task_menu_drink_dta_list[1].price_value,
+								task_menu_drink_dta_list[2].price_value,
+								task_menu_drink_dta_list[3].price_value);
 
-						sprintf(linea2, "MOTOR 2: %s,%d,%c",
-						        (task_menu_motor_dta_list[1].power_value ? "ON" : "OFF"),
-								task_menu_motor_dta_list[1].speed_value,
-						        (task_menu_motor_dta_list[1].spin_value ? 'R' : 'L'));
 						displayClear();
 					    displayCharPositionWrite(0, 0);
 						displayStringWrite(linea1);
 					    displayCharPositionWrite(0, 1);
 						displayStringWrite(linea2);
 					}
-
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event)){
-
-						p_task_menu_dta->flag = false;
-						if(p_task_menu_dta->motor_number == 1 ){
-							p_task_menu_dta->motor_number =0;
-
-						}
-						else {
-						p_task_menu_dta->motor_number = 1;
-						}
-						displayClear();
-					    displayCharPositionWrite(0, 0);
-						displayStringWrite("ENTER/ NEXT/ ESCAPE");
-					    displayCharPositionWrite(0, 1);
-					    char text_motor[20] = "> MOTOR ";
-					    char motor_str[12];
-					    sprintf(motor_str, "%d", p_task_menu_dta->motor_number + 1);
-					    strcat(text_motor, motor_str);
-						displayStringWrite(text_motor);
-
-					}
-
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_POWER;
+						p_task_menu_dta->state = ST_MEN_XX_SET_STOCK;
 						displayClear();
 					    displayCharPositionWrite(0, 0);
-						displayStringWrite("ENTER/ NEXT/ ESCAPE");
-					    displayCharPositionWrite(0, 1);
-						displayStringWrite("> Power");
-					}
-
-					break;
-
-				case ST_MEN_XX_POWER:
-
-
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event))
-					{
-						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_SPEED;
-						displayClear();
-					    displayCharPositionWrite(0, 0);
-						displayStringWrite("ENTER/ NEXT/ ESCAPE");
-					    displayCharPositionWrite(0, 1);
-						displayStringWrite("> Speed");
-					}
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_ESCAPE_ACTIVE == p_task_menu_dta->event))
-					{
-						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_MOTOR;
-						displayClear();
-					    displayCharPositionWrite(0, 0);
-						displayStringWrite("ENTER/ NEXT/ ESCAPE");
-					    displayCharPositionWrite(0, 1);
-					    char text_motor[20] = "> MOTOR ";
-					    char motorStr[12];
-					    sprintf(motorStr, "%d", p_task_menu_dta->motor_number + 1);
-					    strcat(text_motor,motorStr);
-						displayStringWrite(text_motor);
-					}
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
-					{
-						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_SET_POWER;
-						displayClear();
-					    displayCharPositionWrite(0, 0);
-						displayStringWrite("ENTER/ NEXT/ ESCAPE");
-					    displayCharPositionWrite(0, 1);
-						displayStringWrite("> OFF");
-					}
-
-
-
-					break;
-
-
-				case ST_MEN_XX_SET_POWER:
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_ESCAPE_ACTIVE == p_task_menu_dta->event))
-					{
-						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_POWER;
-						displayClear();
-					    displayCharPositionWrite(0, 0);
-						displayStringWrite("ENTER/ NEXT/ ESCAPE");
-					    displayCharPositionWrite(0, 1);
-						displayStringWrite("> Power");
-
-					}
-
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event))
-					{
-						p_task_menu_dta->flag = false;
-						displayClear();
-						displayCharPositionWrite(0, 0);
-						displayStringWrite("ENTER/ NEXT/ ESCAPE");
-						displayCharPositionWrite(0, 1);
-
-						if(p_task_menu_dta->power_value == 1 ){
-							p_task_menu_dta->power_value = 0;
-							displayStringWrite("> OFF");
-						}
-						else {
-							p_task_menu_dta->power_value = 1;
-							displayStringWrite("> ON");
-						}
-					}
-
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
-					{
-						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_MAIN;
-						p_task_menu_motor_dta = &task_menu_motor_dta_list[p_task_menu_dta->motor_number];
-						p_task_menu_motor_dta->power_value = p_task_menu_dta->power_value;
-						p_task_menu_dta->power_value = 0;
-
-						char linea1[32];
-						char linea2[32];
-
-
-						sprintf(linea1, "MOTOR 1: %s,%d,%c",
-						        (task_menu_motor_dta_list[0].power_value ? "ON" : "OFF"),
-								task_menu_motor_dta_list[0].speed_value,
-						        (task_menu_motor_dta_list[0].spin_value ? 'R' : 'L'));
-
-						sprintf(linea2, "MOTOR 2: %s,%d,%c",
-						        (task_menu_motor_dta_list[1].power_value ? "ON" : "OFF"),
-								task_menu_motor_dta_list[1].speed_value,
-						        (task_menu_motor_dta_list[1].spin_value ? 'R' : 'L'));
-						displayClear();
-					    displayCharPositionWrite(0, 0);
-						displayStringWrite(linea1);
-					    displayCharPositionWrite(0, 1);
-						displayStringWrite(linea2);
-					}
-
-					break;
-
-				case ST_MEN_XX_SPEED:
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event))
-					{
-						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_SPIN;
-						displayClear();
-					    displayCharPositionWrite(0, 0);
-						displayStringWrite("ENTER/ NEXT/ ESCAPE");
-					    displayCharPositionWrite(0, 1);
-						displayStringWrite("> Spin");
-					}
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_ESCAPE_ACTIVE == p_task_menu_dta->event))
-					{
-						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_MOTOR;
-						displayClear();
-					    displayCharPositionWrite(0, 0);
-						displayStringWrite("ENTER/ NEXT/ ESCAPE");
-					    displayCharPositionWrite(0, 1);
-					    char text_motor[20] = "> MOTOR ";
-					    char motorStr[12];
-					    sprintf(motorStr, "%d", p_task_menu_dta->motor_number + 1);
-					    strcat(text_motor,motorStr);
-						displayStringWrite(text_motor);
-					}
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
-					{
-						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_SET_SPEED;
-						displayClear();
-					    displayCharPositionWrite(0, 0);
-						displayStringWrite("ENTER/ NEXT/ ESCAPE");
+						displayStringWrite("Stock");
 					    displayCharPositionWrite(0, 1);
 						displayStringWrite("> 0");
 					}
-
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_PRICE;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						char linea1[32];
+						sprintf(linea1, "> BEBIDA %d", p_task_menu_dta->drink_number+1);
+						displayStringWrite(linea1);
+					    displayCharPositionWrite(0, 1);
+						displayStringWrite("> Price");
+					}
 
 					break;
 
-				case ST_MEN_XX_SET_SPEED:
+				case ST_MEN_XX_SET_STOCK:
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_ESCAPE_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_SPEED;
+						p_task_menu_dta->state = ST_MEN_XX_STOCK;
 						displayClear();
 					    displayCharPositionWrite(0, 0);
-						displayStringWrite("ENTER/ NEXT/ ESCAPE");
+						char linea1[32];
+						sprintf(linea1, "> BEBIDA %d", p_task_menu_dta->drink_number+1);
+						displayStringWrite(linea1);
 					    displayCharPositionWrite(0, 1);
-						displayStringWrite("> Speed");
+						displayStringWrite("> Stock");
 
 					}
 
@@ -464,46 +347,70 @@ void task_menu_update(void *parameters)
 						p_task_menu_dta->flag = false;
 						displayClear();
 						displayCharPositionWrite(0, 0);
-						displayStringWrite("ENTER/ NEXT/ ESCAPE");
+						displayStringWrite("Stock");
 						displayCharPositionWrite(0, 1);
 
-
-						if(p_task_menu_dta->speed_value == 9 ){
-							p_task_menu_dta->speed_value = 0;
+						if(p_task_menu_dta->stock_value == 9 ){
+							p_task_menu_dta->stock_value = 0;
 						}
 						else {
-							p_task_menu_dta->speed_value++;
+							p_task_menu_dta->stock_value++;
 						}
 
 					    displayCharPositionWrite(0, 1);
-					    char text_speed[5] = "> ";
-					    char speed_str[2];
-					    sprintf(speed_str, "%d", p_task_menu_dta->speed_value);
-					    strcat(text_speed, speed_str);
-						displayStringWrite(text_speed);
+					    char text_stock[5] = "> ";
+					    char stock_str[2];
+					    sprintf(stock_str, "%d", p_task_menu_dta->stock_value);
+					    strcat(text_stock, stock_str);
+						displayStringWrite(text_stock);
+					}
+
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER2_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						displayClear();
+						displayCharPositionWrite(0, 0);
+						displayStringWrite("Stock");
+						displayCharPositionWrite(0, 1);
+
+						if(p_task_menu_dta->stock_value == 0 ){
+							p_task_menu_dta->stock_value = 9;
+						}
+						else {
+							p_task_menu_dta->stock_value--;
+						}
+
+					    displayCharPositionWrite(0, 1);
+					    char text_stock[5] = "> ";
+					    char stock_str[2];
+					    sprintf(stock_str, "%d", p_task_menu_dta->stock_value);
+					    strcat(text_stock, stock_str);
+						displayStringWrite(text_stock);
 					}
 
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						p_task_menu_dta->state = ST_MEN_XX_MAIN;
-						p_task_menu_motor_dta = &task_menu_motor_dta_list[p_task_menu_dta->motor_number];
-						p_task_menu_motor_dta->speed_value = p_task_menu_dta->speed_value;
-						p_task_menu_dta->speed_value = 0;
+						p_task_menu_drink_dta = &task_menu_drink_dta_list[p_task_menu_dta->drink_number];
+						p_task_menu_drink_dta->stock_value = p_task_menu_dta->stock_value;
+						p_task_menu_dta->stock_value = 0;
 
 						char linea1[32];
 						char linea2[32];
 
+						sprintf(linea1, "Stocks: %d,%d,%d,%d",
+								task_menu_drink_dta_list[0].stock_value,
+								task_menu_drink_dta_list[1].stock_value,
+								task_menu_drink_dta_list[2].stock_value,
+								task_menu_drink_dta_list[3].stock_value);
 
-						sprintf(linea1, "MOTOR 1: %s,%d,%c",
-						        (task_menu_motor_dta_list[0].power_value ? "ON" : "OFF"),
-								task_menu_motor_dta_list[0].speed_value,
-						        (task_menu_motor_dta_list[0].spin_value ? 'R' : 'L'));
+						sprintf(linea2, "Prices: %d,%d,%d,%d",
+								task_menu_drink_dta_list[0].price_value,
+								task_menu_drink_dta_list[1].price_value,
+								task_menu_drink_dta_list[2].price_value,
+								task_menu_drink_dta_list[3].price_value);
 
-						sprintf(linea2, "MOTOR 2: %s,%d,%c",
-						        (task_menu_motor_dta_list[1].power_value ? "ON" : "OFF"),
-								task_menu_motor_dta_list[1].speed_value,
-						        (task_menu_motor_dta_list[1].spin_value ? 'R' : 'L'));
 						displayClear();
 					    displayCharPositionWrite(0, 0);
 						displayStringWrite(linea1);
@@ -513,55 +420,71 @@ void task_menu_update(void *parameters)
 
 					break;
 
-				case ST_MEN_XX_SPIN:
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event))
-					{
-						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_POWER;
-						displayClear();
-					    displayCharPositionWrite(0, 0);
-						displayStringWrite("ENTER/ NEXT/ ESCAPE");
-					    displayCharPositionWrite(0, 1);
-						displayStringWrite("> Power");
-					}
+				case ST_MEN_XX_PRICE:
+
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_ESCAPE_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_MOTOR;
+						p_task_menu_dta->state = ST_MEN_XX_MAIN;
+						char linea1[32];
+						char linea2[32];
+
+
+						sprintf(linea1, "Stocks: %d,%d,%d,%d",
+								task_menu_drink_dta_list[0].stock_value,
+								task_menu_drink_dta_list[1].stock_value,
+								task_menu_drink_dta_list[2].stock_value,
+								task_menu_drink_dta_list[3].stock_value);
+
+						sprintf(linea2, "Precios: %d,%d,%d,%d",
+								task_menu_drink_dta_list[0].price_value,
+								task_menu_drink_dta_list[1].price_value,
+								task_menu_drink_dta_list[2].price_value,
+								task_menu_drink_dta_list[3].price_value);
+
 						displayClear();
 					    displayCharPositionWrite(0, 0);
-						displayStringWrite("ENTER/ NEXT/ ESCAPE");
+						displayStringWrite(linea1);
 					    displayCharPositionWrite(0, 1);
-					    char text_motor[20] = "> MOTOR ";
-					    char motorStr[2];
-					    sprintf(motorStr, "%d", p_task_menu_dta->motor_number);
-					    strcat(text_motor,motorStr);
-						displayStringWrite(text_motor);
+						displayStringWrite(linea2);
 					}
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_SET_SPIN;
+						p_task_menu_dta->state = ST_MEN_XX_SET_PRICE;
 						displayClear();
 					    displayCharPositionWrite(0, 0);
-						displayStringWrite("ENTER/ NEXT/ ESCAPE");
+						displayStringWrite("Price");
 					    displayCharPositionWrite(0, 1);
-						displayStringWrite("> LEFT");
+						displayStringWrite("> 0");
 					}
-
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_STOCK;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						char linea1[32];
+						sprintf(linea1, "> BEBIDA %d", p_task_menu_dta->drink_number+1);
+						displayStringWrite(linea1);
+					    displayCharPositionWrite(0, 1);
+						displayStringWrite("> Stock");
+					}
 
 					break;
 
-				case ST_MEN_XX_SET_SPIN:
+				case ST_MEN_XX_SET_PRICE:
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_ESCAPE_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_SPIN;
+						p_task_menu_dta->state = ST_MEN_XX_PRICE;
 						displayClear();
 					    displayCharPositionWrite(0, 0);
-						displayStringWrite("ENTER/ NEXT/ ESCAPE");
+						char linea1[32];
+						sprintf(linea1, "> BEBIDA %d", p_task_menu_dta->drink_number);
+						displayStringWrite(linea1);
 					    displayCharPositionWrite(0, 1);
-						displayStringWrite("> Spin");
+						displayStringWrite("> Price");
 
 					}
 
@@ -570,40 +493,70 @@ void task_menu_update(void *parameters)
 						p_task_menu_dta->flag = false;
 						displayClear();
 						displayCharPositionWrite(0, 0);
-						displayStringWrite("ENTER/ NEXT/ ESCAPE");
+						displayStringWrite("Price");
 						displayCharPositionWrite(0, 1);
 
-						if(p_task_menu_dta->spin_value == 1 ){
-							p_task_menu_dta->spin_value = 0;
-							displayStringWrite("> LEFT");
+						if(p_task_menu_dta->price_value == 9 ){
+							p_task_menu_dta->price_value = 0;
 						}
 						else {
-							p_task_menu_dta->spin_value = 1;
-							displayStringWrite("> RIGHT");
+							p_task_menu_dta->price_value++;
 						}
+
+					    displayCharPositionWrite(0, 1);
+					    char text_price[5] = "> ";
+					    char price_str[2];
+					    sprintf(price_str, "%d", p_task_menu_dta->price_value);
+					    strcat(text_price, price_str);
+						displayStringWrite(text_price);
+					}
+
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER2_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						displayClear();
+						displayCharPositionWrite(0, 0);
+						displayStringWrite("Price");
+						displayCharPositionWrite(0, 1);
+
+						if(p_task_menu_dta->price_value == 0 ){
+							p_task_menu_dta->price_value = 9;
+						}
+						else {
+							p_task_menu_dta->price_value--;
+						}
+
+					    displayCharPositionWrite(0, 1);
+					    char text_price[5] = "> ";
+					    char price_str[2];
+					    sprintf(price_str, "%d", p_task_menu_dta->price_value);
+					    strcat(text_price, price_str);
+						displayStringWrite(text_price);
 					}
 
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						p_task_menu_dta->state = ST_MEN_XX_MAIN;
-						p_task_menu_motor_dta = &task_menu_motor_dta_list[p_task_menu_dta->motor_number];
-						p_task_menu_motor_dta->spin_value = p_task_menu_dta->spin_value;
-						p_task_menu_dta->spin_value = 0;
+						p_task_menu_drink_dta = &task_menu_drink_dta_list[p_task_menu_dta->drink_number];
+						p_task_menu_drink_dta->price_value = p_task_menu_dta->price_value;
+						p_task_menu_dta->price_value = 0;
 
 						char linea1[32];
 						char linea2[32];
 
+						sprintf(linea1, "Stocks: %d,%d,%d,%d",
+								task_menu_drink_dta_list[0].stock_value,
+								task_menu_drink_dta_list[1].stock_value,
+								task_menu_drink_dta_list[2].stock_value,
+								task_menu_drink_dta_list[3].stock_value);
 
-						sprintf(linea1, "MOTOR 1: %s,%d,%c",
-						        (task_menu_motor_dta_list[0].power_value ? "ON" : "OFF"),
-								task_menu_motor_dta_list[0].speed_value,
-						        (task_menu_motor_dta_list[0].spin_value ? 'R' : 'L'));
+						sprintf(linea2, "Prices: %d,%d,%d,%d",
+								task_menu_drink_dta_list[0].price_value,
+								task_menu_drink_dta_list[1].price_value,
+								task_menu_drink_dta_list[2].price_value,
+								task_menu_drink_dta_list[3].price_value);
 
-						sprintf(linea2, "MOTOR 2: %s,%d,%c",
-						        (task_menu_motor_dta_list[1].power_value ? "ON" : "OFF"),
-								task_menu_motor_dta_list[1].speed_value,
-						        (task_menu_motor_dta_list[1].spin_value ? 'R' : 'L'));
 						displayClear();
 					    displayCharPositionWrite(0, 0);
 						displayStringWrite(linea1);
@@ -612,7 +565,6 @@ void task_menu_update(void *parameters)
 					}
 
 					break;
-
 
 				default:
 

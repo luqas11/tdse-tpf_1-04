@@ -99,8 +99,6 @@ void Error_Handler(void);
 #define D4_GPIO_Port GPIOB
 #define D10_Pin GPIO_PIN_6
 #define D10_GPIO_Port GPIOB
-#define DECREASE_Pin GPIO_PIN_7
-#define DECREASE_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

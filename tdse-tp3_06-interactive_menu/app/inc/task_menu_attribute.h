@@ -77,19 +77,15 @@ typedef enum task_menu_ev {EV_MEN_ENTER1_IDLE,
 						   EV_MEN_ESCAPE_IDLE,
 						   EV_MEN_ESCAPE_ACTIVE,
 						   EV_MEN_COIN_IDLE,
-						   EV_MEN_COIN_ACTIVE,
-						   EV_MEN_DECREASE_IDLE,
-						   EV_MEN_DECREASE_ACTIVE} task_menu_ev_t;
+						   EV_MEN_COIN_ACTIVE} task_menu_ev_t;
 
 /* State of Task Menu */
-typedef enum task_menu_st {ST_MEN_XX_MOTOR,
+typedef enum task_menu_st {ST_MEN_XX_DRINK,
 						   ST_MEN_XX_MAIN,
-						   ST_MEN_XX_POWER,
-						   ST_MEN_XX_SET_POWER,
-						   ST_MEN_XX_SPEED,
-						   ST_MEN_XX_SET_SPEED,
-						   ST_MEN_XX_SPIN,
-						   ST_MEN_XX_SET_SPIN} task_menu_st_t;
+						   ST_MEN_XX_PRICE,
+						   ST_MEN_XX_SET_PRICE,
+						   ST_MEN_XX_STOCK,
+						   ST_MEN_XX_SET_STOCK} task_menu_st_t;
 
 typedef struct
 {
@@ -97,20 +93,18 @@ typedef struct
 	task_menu_st_t	state;
 	task_menu_ev_t	event;
 	bool			flag;
-	int		motor_number;
-	int		power_value;
-	int		speed_value;
-	int		spin_value;
+	int		drink_number;
+	int		stock_value;
+	int		price_value;
 
 } task_menu_dta_t;
 
 typedef struct
 {
-	int		power_value;
-	int		speed_value;
-	int		spin_value;
+	int		stock_value;
+	int		price_value;
 
-} task_menu_motor_dta_t;
+} task_menu_drink_dta_t;
 
 /********************** external data declaration ****************************/
 extern task_menu_dta_t task_menu_dta;

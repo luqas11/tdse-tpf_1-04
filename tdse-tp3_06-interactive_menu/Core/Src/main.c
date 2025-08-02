@@ -269,11 +269,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : A3_Pin DECREASE_Pin */
-  GPIO_InitStruct.Pin = A3_Pin|DECREASE_Pin;
+  /*Configure GPIO pin : A3_Pin */
+  GPIO_InitStruct.Pin = A3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  HAL_GPIO_Init(A3_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : D6_Pin D10_Pin */
   GPIO_InitStruct.Pin = D6_Pin|D10_Pin;
