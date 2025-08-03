@@ -61,6 +61,9 @@
 #define DEL_MEN_XX_MED				50ul
 #define DEL_MEN_XX_MAX				500ul
 
+#define MAX_PRICE 9
+#define MAX_STOCK 99
+#define DRINK_DELIVERY_DELAY 5000
 /********************** internal data declaration ****************************/
 task_menu_dta_t task_menu_dta =
 	{DEL_MEN_XX_MIN, ST_MEN_XX_MAIN_USER, EV_MEN_OK_IDLE, false, 0, 0, 0, 0};
@@ -359,7 +362,7 @@ void task_menu_update(void *parameters)
 								HAL_GPIO_WritePin(LED_R_PORT, LED_R_PIN, LED_R_ON);
 								HAL_GPIO_WritePin(LED_B_PORT, LED_B_PIN, LED_B_ON);
 							}
-							HAL_Delay(5000);
+							HAL_Delay(DRINK_DELIVERY_DELAY);
 							HAL_GPIO_WritePin(LED_R_PORT, LED_R_PIN, LED_R_OFF);
 							HAL_GPIO_WritePin(LED_B_PORT, LED_B_PIN, LED_B_OFF);
 							HAL_GPIO_WritePin(LED_G_PORT, LED_G_PIN, LED_G_OFF);
@@ -485,7 +488,7 @@ void task_menu_update(void *parameters)
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
-						if(p_task_menu_dta->stock_value == 9 ){
+						if(p_task_menu_dta->stock_value < MAX_STOCK){
 							p_task_menu_dta->stock_value = 0;
 						}
 						else {
@@ -498,10 +501,7 @@ void task_menu_update(void *parameters)
 					{
 						p_task_menu_dta->flag = false;
 
-						if(p_task_menu_dta->stock_value == 0 ){
-							p_task_menu_dta->stock_value = 9;
-						}
-						else {
+						if(p_task_menu_dta->stock_value > 0){
 							p_task_menu_dta->stock_value--;
 						}
 						writeOptionValueText("> Stock   ", p_task_menu_dta->stock_value);
@@ -572,10 +572,7 @@ void task_menu_update(void *parameters)
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
-						if(p_task_menu_dta->price_value == 9 ){
-							p_task_menu_dta->price_value = 0;
-						}
-						else {
+						if(p_task_menu_dta->price_value < MAX_PRICE ){
 							p_task_menu_dta->price_value++;
 						}
 						writeOptionValueText("> Price   ", p_task_menu_dta->price_value);
@@ -584,10 +581,7 @@ void task_menu_update(void *parameters)
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER2_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
-						if(p_task_menu_dta->price_value == 0 ){
-							p_task_menu_dta->price_value = 9;
-						}
-						else {
+						if(p_task_menu_dta->price_value > 0 ){
 							p_task_menu_dta->price_value--;
 						}
 						writeOptionValueText("> Price   ", p_task_menu_dta->price_value);
