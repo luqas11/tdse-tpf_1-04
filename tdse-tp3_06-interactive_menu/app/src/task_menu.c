@@ -519,9 +519,6 @@ void task_menu_update(void *parameters)
 					{
 						p_task_menu_dta->flag = false;
 						if(p_task_menu_dta->stock_value < MAX_STOCK){
-							p_task_menu_dta->stock_value = 0;
-						}
-						else {
 							p_task_menu_dta->stock_value++;
 						}
 						writeOptionValueText("> Stock   ", p_task_menu_dta->stock_value);
