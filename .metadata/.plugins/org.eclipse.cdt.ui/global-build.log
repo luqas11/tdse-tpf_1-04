@@ -1702,3 +1702,318 @@ Finished building: default.size.stdout
  
 Finished building: tdse-tp3_06-interactive_menu.list
  
+23:25:27 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+../app/src/task_menu.c: In function 'task_menu_update':
+../app/src/task_menu.c:767:66: error: 'task_menu_dta_t' has no member named 'price_number'; did you mean 'drink_number'?
+  767 |                                                 p_task_menu_dta->price_number = 0;
+      |                                                                  ^~~~~~~~~~~~
+      |                                                                  drink_number
+../app/src/task_menu.c:793:66: error: 'task_menu_dta_t' has no member named 'price_number'; did you mean 'drink_number'?
+  793 |                                                 p_task_menu_dta->price_number = 0;
+      |                                                                  ^~~~~~~~~~~~
+      |                                                                  drink_number
+make: *** [app/src/subdir.mk:34: app/src/task_menu.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+23:25:57 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+arm-none-eabi-gcc -o "tdse-tp3_06-interactive_menu.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"E:\Users\Lucas\Git\tdse-tpf_1-04\tdse-tp3_06-interactive_menu\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp3_06-interactive_menu.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: tdse-tp3_06-interactive_menu.elf
+ 
+arm-none-eabi-size  tdse-tp3_06-interactive_menu.elf 
+arm-none-eabi-objdump -h -S tdse-tp3_06-interactive_menu.elf  > "tdse-tp3_06-interactive_menu.list"
+   text	   data	    bss	    dec	    hex	filename
+  23980	    192	   2328	  26500	   6784	tdse-tp3_06-interactive_menu.elf
+Finished building: default.size.stdout
+ 
+Finished building: tdse-tp3_06-interactive_menu.list
+ 
+23:28:26 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+arm-none-eabi-gcc -o "tdse-tp3_06-interactive_menu.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"E:\Users\Lucas\Git\tdse-tpf_1-04\tdse-tp3_06-interactive_menu\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp3_06-interactive_menu.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: tdse-tp3_06-interactive_menu.elf
+ 
+arm-none-eabi-size  tdse-tp3_06-interactive_menu.elf 
+arm-none-eabi-objdump -h -S tdse-tp3_06-interactive_menu.elf  > "tdse-tp3_06-interactive_menu.list"
+   text	   data	    bss	    dec	    hex	filename
+  23996	    192	   2328	  26516	   6794	tdse-tp3_06-interactive_menu.elf
+Finished building: default.size.stdout
+ 
+Finished building: tdse-tp3_06-interactive_menu.list
+ 
+23:31:50 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+arm-none-eabi-gcc -o "tdse-tp3_06-interactive_menu.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"E:\Users\Lucas\Git\tdse-tpf_1-04\tdse-tp3_06-interactive_menu\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp3_06-interactive_menu.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: tdse-tp3_06-interactive_menu.elf
+ 
+arm-none-eabi-size  tdse-tp3_06-interactive_menu.elf 
+arm-none-eabi-objdump -h -S tdse-tp3_06-interactive_menu.elf  > "tdse-tp3_06-interactive_menu.list"
+   text	   data	    bss	    dec	    hex	filename
+  24008	    192	   2328	  26528	   67a0	tdse-tp3_06-interactive_menu.elf
+Finished building: default.size.stdout
+ 
+Finished building: tdse-tp3_06-interactive_menu.list
+ 
+23:33:14 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+arm-none-eabi-gcc -o "tdse-tp3_06-interactive_menu.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"E:\Users\Lucas\Git\tdse-tpf_1-04\tdse-tp3_06-interactive_menu\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp3_06-interactive_menu.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: tdse-tp3_06-interactive_menu.elf
+ 
+arm-none-eabi-size  tdse-tp3_06-interactive_menu.elf 
+arm-none-eabi-objdump -h -S tdse-tp3_06-interactive_menu.elf  > "tdse-tp3_06-interactive_menu.list"
+   text	   data	    bss	    dec	    hex	filename
+  23820	    192	   2328	  26340	   66e4	tdse-tp3_06-interactive_menu.elf
+Finished building: default.size.stdout
+ 
+Finished building: tdse-tp3_06-interactive_menu.list
+ 
+23:38:46 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+../app/src/task_menu.c: In function 'task_menu_update':
+../app/src/task_menu.c:307:49: warning: implicit declaration of function 'writeUserMenuText'; did you mean 'writeUserMainText'? [-Wimplicit-function-declaration]
+  307 |                                                 writeUserMenuText(p_task_menu_dta->coins);
+      |                                                 ^~~~~~~~~~~~~~~~~
+      |                                                 writeUserMainText
+arm-none-eabi-gcc -o "tdse-tp3_06-interactive_menu.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"E:\Users\Lucas\Git\tdse-tpf_1-04\tdse-tp3_06-interactive_menu\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp3_06-interactive_menu.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+E:/Program Files/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: ./app/src/task_menu.o: in function `task_menu_update':
+E:/Users/Lucas/Git/tdse-tpf_1-04/tdse-tp3_06-interactive_menu/Debug/../app/src/task_menu.c:307: undefined reference to `writeUserMenuText'
+E:/Program Files/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: E:/Users/Lucas/Git/tdse-tpf_1-04/tdse-tp3_06-interactive_menu/Debug/../app/src/task_menu.c:358: undefined reference to `writeUserMenuText'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:65: tdse-tp3_06-interactive_menu.elf] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+23:39:21 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+../app/src/task_menu.c: In function 'task_menu_update':
+../app/src/task_menu.c:358:57: warning: implicit declaration of function 'writeUserMenuText'; did you mean 'writeUserMainText'? [-Wimplicit-function-declaration]
+  358 |                                                         writeUserMenuText(p_task_menu_dta->coins);
+      |                                                         ^~~~~~~~~~~~~~~~~
+      |                                                         writeUserMainText
+arm-none-eabi-gcc -o "tdse-tp3_06-interactive_menu.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"E:\Users\Lucas\Git\tdse-tpf_1-04\tdse-tp3_06-interactive_menu\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp3_06-interactive_menu.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+E:/Program Files/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: ./app/src/task_menu.o: in function `task_menu_update':
+E:/Users/Lucas/Git/tdse-tpf_1-04/tdse-tp3_06-interactive_menu/Debug/../app/src/task_menu.c:358: undefined reference to `writeUserMenuText'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:65: tdse-tp3_06-interactive_menu.elf] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+23:39:31 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+arm-none-eabi-gcc -o "tdse-tp3_06-interactive_menu.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"E:\Users\Lucas\Git\tdse-tpf_1-04\tdse-tp3_06-interactive_menu\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp3_06-interactive_menu.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: tdse-tp3_06-interactive_menu.elf
+ 
+arm-none-eabi-size  tdse-tp3_06-interactive_menu.elf 
+arm-none-eabi-objdump -h -S tdse-tp3_06-interactive_menu.elf  > "tdse-tp3_06-interactive_menu.list"
+   text	   data	    bss	    dec	    hex	filename
+  22860	    192	   2328	  25380	   6324	tdse-tp3_06-interactive_menu.elf
+Finished building: default.size.stdout
+ 
+Finished building: tdse-tp3_06-interactive_menu.list
+ 
+23:49:56 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+arm-none-eabi-gcc -o "tdse-tp3_06-interactive_menu.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"E:\Users\Lucas\Git\tdse-tpf_1-04\tdse-tp3_06-interactive_menu\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp3_06-interactive_menu.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: tdse-tp3_06-interactive_menu.elf
+ 
+arm-none-eabi-size  tdse-tp3_06-interactive_menu.elf 
+arm-none-eabi-objdump -h -S tdse-tp3_06-interactive_menu.elf  > "tdse-tp3_06-interactive_menu.list"
+   text	   data	    bss	    dec	    hex	filename
+  22124	    192	   2328	  24644	   6044	tdse-tp3_06-interactive_menu.elf
+Finished building: default.size.stdout
+ 
+Finished building: tdse-tp3_06-interactive_menu.list
+ 
+00:20:22 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+../app/src/task_menu.c: In function 'writeDrinkText':
+../app/src/task_menu.c:140:28: error: 'linea1' undeclared (first use in this function); did you mean 'line1'?
+  140 |         displayStringWrite(linea1);
+      |                            ^~~~~~
+      |                            line1
+../app/src/task_menu.c:140:28: note: each undeclared identifier is reported only once for each function it appears in
+../app/src/task_menu.c:144:28: error: 'linea2' undeclared (first use in this function); did you mean 'line2'?
+  144 |         displayStringWrite(linea2);
+      |                            ^~~~~~
+      |                            line2
+make: *** [app/src/subdir.mk:34: app/src/task_menu.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+00:20:39 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+../app/src/task_menu.c: In function 'task_menu_update':
+../app/src/task_menu.c:389:49: warning: 'writeConfigOptionText' accessing 32 bytes in a region of size 8 [-Wstringop-overflow=]
+  389 |                                                 writeConfigOptionText(p_task_menu_dta->drink_number, "> Stock");
+      |                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../app/src/task_menu.c:389:49: note: referencing argument 2 of type 'char[32]'
+../app/src/task_menu.c:147:6: note: in a call to function 'writeConfigOptionText'
+  147 | void writeConfigOptionText(int number, char option[32]){
+      |      ^~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "tdse-tp3_06-interactive_menu.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"E:\Users\Lucas\Git\tdse-tpf_1-04\tdse-tp3_06-interactive_menu\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp3_06-interactive_menu.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: tdse-tp3_06-interactive_menu.elf
+ 
+arm-none-eabi-size  tdse-tp3_06-interactive_menu.elf 
+arm-none-eabi-objdump -h -S tdse-tp3_06-interactive_menu.elf  > "tdse-tp3_06-interactive_menu.list"
+   text	   data	    bss	    dec	    hex	filename
+  22156	    192	   2328	  24676	   6064	tdse-tp3_06-interactive_menu.elf
+Finished building: default.size.stdout
+ 
+Finished building: tdse-tp3_06-interactive_menu.list
+ 
+00:21:41 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+arm-none-eabi-gcc -o "tdse-tp3_06-interactive_menu.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"E:\Users\Lucas\Git\tdse-tpf_1-04\tdse-tp3_06-interactive_menu\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp3_06-interactive_menu.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: tdse-tp3_06-interactive_menu.elf
+ 
+arm-none-eabi-size  tdse-tp3_06-interactive_menu.elf 
+arm-none-eabi-objdump -h -S tdse-tp3_06-interactive_menu.elf  > "tdse-tp3_06-interactive_menu.list"
+   text	   data	    bss	    dec	    hex	filename
+  22180	    192	   2328	  24700	   607c	tdse-tp3_06-interactive_menu.elf
+Finished building: default.size.stdout
+ 
+Finished building: tdse-tp3_06-interactive_menu.list
+ 
+00:24:03 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+../app/src/task_menu.c: In function 'task_menu_update':
+../app/src/task_menu.c:389:49: warning: 'writeConfigOptionText' accessing 16 bytes in a region of size 11 [-Wstringop-overflow=]
+  389 |                                                 writeConfigOptionText(p_task_menu_dta->drink_number, "> Stock   ");
+      |                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../app/src/task_menu.c:389:49: note: referencing argument 2 of type 'char[16]'
+../app/src/task_menu.c:147:6: note: in a call to function 'writeConfigOptionText'
+  147 | void writeConfigOptionText(int number, char option[16]){
+      |      ^~~~~~~~~~~~~~~~~~~~~
+../app/src/task_menu.c:397:49: warning: 'writeConfigOptionText' accessing 16 bytes in a region of size 11 [-Wstringop-overflow=]
+  397 |                                                 writeConfigOptionText(p_task_menu_dta->drink_number, "> Stock   ");
+      |                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../app/src/task_menu.c:397:49: note: referencing argument 2 of type 'char[16]'
+../app/src/task_menu.c:147:6: note: in a call to function 'writeConfigOptionText'
+  147 | void writeConfigOptionText(int number, char option[16]){
+      |      ^~~~~~~~~~~~~~~~~~~~~
+../app/src/task_menu.c:405:49: warning: 'writeConfigOptionText' accessing 16 bytes in a region of size 11 [-Wstringop-overflow=]
+  405 |                                                 writeConfigOptionText(p_task_menu_dta->drink_number, "> Stock   ");
+      |                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../app/src/task_menu.c:405:49: note: referencing argument 2 of type 'char[16]'
+../app/src/task_menu.c:147:6: note: in a call to function 'writeConfigOptionText'
+  147 | void writeConfigOptionText(int number, char option[16]){
+      |      ^~~~~~~~~~~~~~~~~~~~~
+../app/src/task_menu.c:413:49: warning: 'writeConfigOptionText' accessing 16 bytes in a region of size 11 [-Wstringop-overflow=]
+  413 |                                                 writeConfigOptionText(p_task_menu_dta->drink_number, "> Stock   ");
+      |                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../app/src/task_menu.c:413:49: note: referencing argument 2 of type 'char[16]'
+../app/src/task_menu.c:147:6: note: in a call to function 'writeConfigOptionText'
+  147 | void writeConfigOptionText(int number, char option[16]){
+      |      ^~~~~~~~~~~~~~~~~~~~~
+../app/src/task_menu.c:455:49: warning: 'writeConfigOptionText' accessing 16 bytes in a region of size 11 [-Wstringop-overflow=]
+  455 |                                                 writeConfigOptionText(p_task_menu_dta->drink_number, "> Price   ");
+      |                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../app/src/task_menu.c:455:49: note: referencing argument 2 of type 'char[16]'
+../app/src/task_menu.c:147:6: note: in a call to function 'writeConfigOptionText'
+  147 | void writeConfigOptionText(int number, char option[16]){
+      |      ^~~~~~~~~~~~~~~~~~~~~
+../app/src/task_menu.c:475:49: warning: 'writeConfigOptionText' accessing 16 bytes in a region of size 11 [-Wstringop-overflow=]
+  475 |                                                 writeConfigOptionText(p_task_menu_dta->drink_number, "> Stock   ");
+      |                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../app/src/task_menu.c:475:49: note: referencing argument 2 of type 'char[16]'
+../app/src/task_menu.c:147:6: note: in a call to function 'writeConfigOptionText'
+  147 | void writeConfigOptionText(int number, char option[16]){
+      |      ^~~~~~~~~~~~~~~~~~~~~
+../app/src/task_menu.c:568:49: warning: 'writeConfigOptionText' accessing 16 bytes in a region of size 11 [-Wstringop-overflow=]
+  568 |                                                 writeConfigOptionText(p_task_menu_dta->drink_number, "> Stock   ");
+      |                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../app/src/task_menu.c:568:49: note: referencing argument 2 of type 'char[16]'
+../app/src/task_menu.c:147:6: note: in a call to function 'writeConfigOptionText'
+  147 | void writeConfigOptionText(int number, char option[16]){
+      |      ^~~~~~~~~~~~~~~~~~~~~
+../app/src/task_menu.c:587:49: warning: 'writeConfigOptionText' accessing 16 bytes in a region of size 11 [-Wstringop-overflow=]
+  587 |                                                 writeConfigOptionText(p_task_menu_dta->drink_number, "> Price   ");
+      |                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../app/src/task_menu.c:587:49: note: referencing argument 2 of type 'char[16]'
+../app/src/task_menu.c:147:6: note: in a call to function 'writeConfigOptionText'
+  147 | void writeConfigOptionText(int number, char option[16]){
+      |      ^~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "tdse-tp3_06-interactive_menu.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"E:\Users\Lucas\Git\tdse-tpf_1-04\tdse-tp3_06-interactive_menu\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp3_06-interactive_menu.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: tdse-tp3_06-interactive_menu.elf
+ 
+arm-none-eabi-size  tdse-tp3_06-interactive_menu.elf 
+arm-none-eabi-objdump -h -S tdse-tp3_06-interactive_menu.elf  > "tdse-tp3_06-interactive_menu.list"
+   text	   data	    bss	    dec	    hex	filename
+  21880	    192	   2328	  24400	   5f50	tdse-tp3_06-interactive_menu.elf
+Finished building: default.size.stdout
+ 
+Finished building: tdse-tp3_06-interactive_menu.list
+ 
+00:24:16 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+arm-none-eabi-gcc -o "tdse-tp3_06-interactive_menu.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"E:\Users\Lucas\Git\tdse-tpf_1-04\tdse-tp3_06-interactive_menu\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp3_06-interactive_menu.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: tdse-tp3_06-interactive_menu.elf
+ 
+arm-none-eabi-size  tdse-tp3_06-interactive_menu.elf 
+arm-none-eabi-objdump -h -S tdse-tp3_06-interactive_menu.elf  > "tdse-tp3_06-interactive_menu.list"
+   text	   data	    bss	    dec	    hex	filename
+  21880	    192	   2328	  24400	   5f50	tdse-tp3_06-interactive_menu.elf
+Finished building: default.size.stdout
+ 
+Finished building: tdse-tp3_06-interactive_menu.list
+ 
+00:30:49 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+../app/src/task_menu.c: In function 'writeConfigOptionText':
+../app/src/task_menu.c:151:32: warning: '%d' directive writing between 1 and 11 bytes into a region of size 8 [-Wformat-overflow=]
+  151 |         sprintf(line, "> DRINK %d", number+1);
+      |                                ^~
+../app/src/task_menu.c:151:23: note: directive argument in the range [-2147483647, 2147483647]
+  151 |         sprintf(line, "> DRINK %d", number+1);
+      |                       ^~~~~~~~~~~~
+../app/src/task_menu.c:151:9: note: 'sprintf' output between 10 and 20 bytes into a destination of size 16
+  151 |         sprintf(line, "> DRINK %d", number+1);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "tdse-tp3_06-interactive_menu.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"E:\Users\Lucas\Git\tdse-tpf_1-04\tdse-tp3_06-interactive_menu\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp3_06-interactive_menu.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: tdse-tp3_06-interactive_menu.elf
+ 
+arm-none-eabi-size  tdse-tp3_06-interactive_menu.elf 
+arm-none-eabi-objdump -h -S tdse-tp3_06-interactive_menu.elf  > "tdse-tp3_06-interactive_menu.list"
+   text	   data	    bss	    dec	    hex	filename
+  21516	    192	   2328	  24036	   5de4	tdse-tp3_06-interactive_menu.elf
+Finished building: default.size.stdout
+ 
+Finished building: tdse-tp3_06-interactive_menu.list
+ 
+00:31:35 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-gcc "../app/src/task_menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../app/inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"app/src/task_menu.d" -MT"app/src/task_menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "app/src/task_menu.o"
+arm-none-eabi-gcc -o "tdse-tp3_06-interactive_menu.elf" @"objects.list"  -lrdimon -mcpu=cortex-m3 -T"E:\Users\Lucas\Git\tdse-tpf_1-04\tdse-tp3_06-interactive_menu\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tdse-tp3_06-interactive_menu.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: tdse-tp3_06-interactive_menu.elf
+ 
+arm-none-eabi-size  tdse-tp3_06-interactive_menu.elf 
+arm-none-eabi-objdump -h -S tdse-tp3_06-interactive_menu.elf  > "tdse-tp3_06-interactive_menu.list"
+   text	   data	    bss	    dec	    hex	filename
+  21516	    192	   2328	  24036	   5de4	tdse-tp3_06-interactive_menu.elf
+Finished building: default.size.stdout
+ 
+Finished building: tdse-tp3_06-interactive_menu.list
+ 
+00:35:52 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-size  tdse-tp3_06-interactive_menu.elf 
+   text	   data	    bss	    dec	    hex	filename
+  21516	    192	   2328	  24036	   5de4	tdse-tp3_06-interactive_menu.elf
+Finished building: default.size.stdout
+ 
+00:36:47 **** Incremental Build of configuration Debug for project tdse-tp3_06-interactive_menu ****
+make -j4 all 
+arm-none-eabi-size  tdse-tp3_06-interactive_menu.elf 
+   text	   data	    bss	    dec	    hex	filename
+  21516	    192	   2328	  24036	   5de4	tdse-tp3_06-interactive_menu.elf
+Finished building: default.size.stdout
+ 
