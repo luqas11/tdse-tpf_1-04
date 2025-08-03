@@ -63,13 +63,13 @@
 
 /********************** internal data declaration ****************************/
 task_menu_dta_t task_menu_dta =
-	{DEL_MEN_XX_MIN, ST_MEN_XX_MAIN, EV_MEN_OK_IDLE, false, 0, 0};
+	{DEL_MEN_XX_MIN, ST_MEN_XX_MAIN_USER, EV_MEN_OK_IDLE, false, 0, 0, 0, 0};
 
 task_menu_drink_dta_t task_menu_drink_dta_list[] = {
-	{0, 0},
-	{0, 0},
-	{0, 0},
-	{0, 0}
+	{17, 4},
+	{12, 9},
+	{8, 2},
+	{20, 3}
 };
 
 extern ADC_HandleTypeDef hadc1;
@@ -137,27 +137,11 @@ void task_menu_init(void *parameters)
 
 	displayInit( DISPLAY_CONNECTION_GPIO_4BITS );
 
-	char linea1[32];
-	char linea2[32];
-
-
-	sprintf(linea1, "Stocks: %d,%d,%d,%d",
-			task_menu_drink_dta_list[0].stock_value,
-			task_menu_drink_dta_list[1].stock_value,
-			task_menu_drink_dta_list[2].stock_value,
-			task_menu_drink_dta_list[3].stock_value);
-
-	sprintf(linea2, "Prices: %d,%d,%d,%d",
-			task_menu_drink_dta_list[0].price_value,
-			task_menu_drink_dta_list[1].price_value,
-			task_menu_drink_dta_list[2].price_value,
-			task_menu_drink_dta_list[3].price_value);
-
 	displayClear();
     displayCharPositionWrite(0, 0);
-	displayStringWrite(linea1);
+	displayStringWrite("> Select drink...");
     displayCharPositionWrite(0, 1);
-	displayStringWrite(linea2);
+	displayStringWrite("> 0 coins");
 
 	g_task_menu_tick_cnt = G_TASK_MEN_TICK_CNT_INI;
 }
@@ -215,7 +199,211 @@ void task_menu_update(void *parameters)
 
 			switch (p_task_menu_dta->state)
 			{
-				case ST_MEN_XX_MAIN:
+
+				case ST_MEN_XX_MAIN_USER:
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_MODE_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_MAIN_CONFIG;
+						char linea1[32];
+						char linea2[32];
+
+						sprintf(linea1, "Stocks: %d,%d,%d,%d",
+								task_menu_drink_dta_list[0].stock_value,
+								task_menu_drink_dta_list[1].stock_value,
+								task_menu_drink_dta_list[2].stock_value,
+								task_menu_drink_dta_list[3].stock_value);
+
+						sprintf(linea2, "Prices: %d,%d,%d,%d",
+								task_menu_drink_dta_list[0].price_value,
+								task_menu_drink_dta_list[1].price_value,
+								task_menu_drink_dta_list[2].price_value,
+								task_menu_drink_dta_list[3].price_value);
+
+						displayClear();
+						displayCharPositionWrite(0, 0);
+						displayStringWrite(linea1);
+						displayCharPositionWrite(0, 1);
+						displayStringWrite(linea2);
+					}
+
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_DRINK;
+						p_task_menu_dta->drink_number = 0;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						char linea1[32];
+						sprintf(linea1, "> DRINK 1 (%d)", task_menu_drink_dta_list[p_task_menu_dta->drink_number].stock_value);
+						displayStringWrite(linea1);
+					    displayCharPositionWrite(0, 1);
+						char linea2[32];
+						sprintf(linea2, "> %d coins (%d)", p_task_menu_dta->coins, task_menu_drink_dta_list[p_task_menu_dta->drink_number].price_value);
+						displayStringWrite(linea2);
+					}
+
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER2_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_DRINK;
+						p_task_menu_dta->drink_number = 1;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						char linea1[32];
+						sprintf(linea1, "> DRINK 2 (%d)", task_menu_drink_dta_list[p_task_menu_dta->drink_number].stock_value);
+						displayStringWrite(linea1);
+					    displayCharPositionWrite(0, 1);
+						char linea2[32];
+						sprintf(linea2, "> %d coins (%d)", p_task_menu_dta->coins, task_menu_drink_dta_list[p_task_menu_dta->drink_number].price_value);
+						displayStringWrite(linea2);
+					}
+
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER3_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_DRINK;
+						p_task_menu_dta->drink_number = 2;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						char linea1[32];
+						sprintf(linea1, "> DRINK 3 (%d)", task_menu_drink_dta_list[p_task_menu_dta->drink_number].stock_value);
+						displayStringWrite(linea1);
+					    displayCharPositionWrite(0, 1);
+						char linea2[32];
+						sprintf(linea2, "> %d coins (%d)", p_task_menu_dta->coins, task_menu_drink_dta_list[p_task_menu_dta->drink_number].price_value);
+						displayStringWrite(linea2);
+					}
+
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER4_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_DRINK;
+						p_task_menu_dta->drink_number = 3;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						char linea1[32];
+						sprintf(linea1, "> DRINK 4 (%d)", task_menu_drink_dta_list[p_task_menu_dta->drink_number].stock_value);
+						displayStringWrite(linea1);
+					    displayCharPositionWrite(0, 1);
+						char linea2[32];
+						sprintf(linea2, "> %d coins (%d)", p_task_menu_dta->coins, task_menu_drink_dta_list[p_task_menu_dta->drink_number].price_value);
+						displayStringWrite(linea2);
+					}
+
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_COIN_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->coins++;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						displayStringWrite("> Select drink...");
+					    displayCharPositionWrite(0, 1);
+						char linea2[32];
+						sprintf(linea2, "> %d coins", p_task_menu_dta->coins);
+						displayStringWrite(linea2);
+					}
+
+					break;
+
+				case ST_MEN_XX_DRINK:
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_MODE_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_MAIN_CONFIG;
+						p_task_menu_dta->drink_number = 0;
+						char linea1[32];
+						char linea2[32];
+
+						sprintf(linea1, "Stocks: %d,%d,%d,%d",
+								task_menu_drink_dta_list[0].stock_value,
+								task_menu_drink_dta_list[1].stock_value,
+								task_menu_drink_dta_list[2].stock_value,
+								task_menu_drink_dta_list[3].stock_value);
+
+						sprintf(linea2, "Prices: %d,%d,%d,%d",
+								task_menu_drink_dta_list[0].price_value,
+								task_menu_drink_dta_list[1].price_value,
+								task_menu_drink_dta_list[2].price_value,
+								task_menu_drink_dta_list[3].price_value);
+
+						displayClear();
+						displayCharPositionWrite(0, 0);
+						displayStringWrite(linea1);
+						displayCharPositionWrite(0, 1);
+						displayStringWrite(linea2);
+					}
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_ESCAPE_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_MAIN_USER;
+						p_task_menu_dta->drink_number = 0;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						displayStringWrite("> Select drink...");
+					    displayCharPositionWrite(0, 1);
+						char linea2[32];
+						sprintf(linea2, "> %d coins", p_task_menu_dta->coins);
+						displayStringWrite(linea2);
+					}
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						if (p_task_menu_dta->coins >= task_menu_drink_dta_list[p_task_menu_dta->drink_number].price_value) {
+							p_task_menu_dta->coins = p_task_menu_dta->coins - task_menu_drink_dta_list[p_task_menu_dta->drink_number].price_value;
+							task_menu_drink_dta_list[p_task_menu_dta->drink_number].stock_value--;
+							p_task_menu_dta->state = ST_MEN_XX_MAIN_USER;
+							displayClear();
+						    displayCharPositionWrite(0, 0);
+							displayStringWrite("Take your drink");
+						    displayCharPositionWrite(0, 1);
+							displayStringWrite("...");
+							if(p_task_menu_dta->drink_number == 0){
+								HAL_GPIO_WritePin(LED_R_PORT, LED_R_PIN, LED_R_ON);
+							}
+							if(p_task_menu_dta->drink_number == 1){
+								HAL_GPIO_WritePin(LED_G_PORT, LED_G_PIN, LED_G_ON);
+							}
+							if(p_task_menu_dta->drink_number == 2){
+								HAL_GPIO_WritePin(LED_B_PORT, LED_B_PIN, LED_B_ON);
+							}
+							if(p_task_menu_dta->drink_number == 3){
+								HAL_GPIO_WritePin(LED_R_PORT, LED_R_PIN, LED_R_ON);
+								HAL_GPIO_WritePin(LED_B_PORT, LED_B_PIN, LED_B_ON);
+							}
+							HAL_Delay(5000);
+							HAL_GPIO_WritePin(LED_R_PORT, LED_R_PIN, LED_R_OFF);
+							HAL_GPIO_WritePin(LED_B_PORT, LED_B_PIN, LED_B_OFF);
+							HAL_GPIO_WritePin(LED_G_PORT, LED_G_PIN, LED_G_OFF);
+
+							p_task_menu_dta->drink_number = 0;
+							displayClear();
+						    displayCharPositionWrite(0, 0);
+							displayStringWrite("Select drink...");
+						    displayCharPositionWrite(0, 1);
+							char linea2[32];
+							sprintf(linea2, "> %d coins", p_task_menu_dta->coins);
+							displayStringWrite(linea2);
+						}
+					}
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_COIN_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						char linea1[32];
+						sprintf(linea1, "> DRINK %d (%d)", p_task_menu_dta->drink_number+1, task_menu_drink_dta_list[p_task_menu_dta->drink_number].stock_value);
+						displayStringWrite(linea1);
+						p_task_menu_dta->coins++;
+
+					    displayCharPositionWrite(0, 1);
+						char linea2[32];
+						sprintf(linea2, "> %d coins (%d)", p_task_menu_dta->coins, task_menu_drink_dta_list[p_task_menu_dta->drink_number].price_value);
+						displayStringWrite(linea2);
+					}
+
+					break;
+
+				case ST_MEN_XX_MAIN_CONFIG:
 
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_COIN_ACTIVE == p_task_menu_dta->event)){
 
@@ -233,7 +421,7 @@ void task_menu_update(void *parameters)
 						p_task_menu_dta->drink_number = 0;
 						displayClear();
 					    displayCharPositionWrite(0, 0);
-						displayStringWrite("> BEBIDA 1");
+						displayStringWrite("> DRINK 1");
 					    displayCharPositionWrite(0, 1);
 						displayStringWrite("> Stock");
 					}
@@ -245,7 +433,7 @@ void task_menu_update(void *parameters)
 						p_task_menu_dta->drink_number = 1;
 						displayClear();
 					    displayCharPositionWrite(0, 0);
-						displayStringWrite("> BEBIDA 2");
+						displayStringWrite("> DRINK 2");
 					    displayCharPositionWrite(0, 1);
 						displayStringWrite("> Stock");
 					}
@@ -257,7 +445,7 @@ void task_menu_update(void *parameters)
 						p_task_menu_dta->drink_number = 2;
 						displayClear();
 					    displayCharPositionWrite(0, 0);
-						displayStringWrite("> BEBIDA 3");
+						displayStringWrite("> DRINK 3");
 					    displayCharPositionWrite(0, 1);
 						displayStringWrite("> Stock");
 					}
@@ -269,9 +457,22 @@ void task_menu_update(void *parameters)
 						p_task_menu_dta->drink_number = 3;
 						displayClear();
 					    displayCharPositionWrite(0, 0);
-						displayStringWrite("> BEBIDA 4");
+						displayStringWrite("> DRINK 4");
 					    displayCharPositionWrite(0, 1);
 						displayStringWrite("> Stock");
+					}
+
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_MODE_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_MAIN_USER;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						displayStringWrite("> Select drink...");
+					    displayCharPositionWrite(0, 1);
+						char linea2[32];
+						sprintf(linea2, "> %d coins", p_task_menu_dta->coins);
+						displayStringWrite(linea2);
 					}
 
 					break;
@@ -280,7 +481,7 @@ void task_menu_update(void *parameters)
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_ESCAPE_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_MAIN;
+						p_task_menu_dta->state = ST_MEN_XX_MAIN_CONFIG;
 						char linea1[32];
 						char linea2[32];
 
@@ -319,7 +520,7 @@ void task_menu_update(void *parameters)
 						displayClear();
 					    displayCharPositionWrite(0, 0);
 						char linea1[32];
-						sprintf(linea1, "> BEBIDA %d", p_task_menu_dta->drink_number+1);
+						sprintf(linea1, "> DRINK %d", p_task_menu_dta->drink_number+1);
 						displayStringWrite(linea1);
 					    displayCharPositionWrite(0, 1);
 						displayStringWrite("> Price");
@@ -335,7 +536,7 @@ void task_menu_update(void *parameters)
 						displayClear();
 					    displayCharPositionWrite(0, 0);
 						char linea1[32];
-						sprintf(linea1, "> BEBIDA %d", p_task_menu_dta->drink_number+1);
+						sprintf(linea1, "> DRINK %d", p_task_menu_dta->drink_number+1);
 						displayStringWrite(linea1);
 					    displayCharPositionWrite(0, 1);
 						displayStringWrite("> Stock");
@@ -391,7 +592,7 @@ void task_menu_update(void *parameters)
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_MAIN;
+						p_task_menu_dta->state = ST_MEN_XX_MAIN_CONFIG;
 						p_task_menu_drink_dta = &task_menu_drink_dta_list[p_task_menu_dta->drink_number];
 						p_task_menu_drink_dta->stock_value = p_task_menu_dta->stock_value;
 						p_task_menu_dta->stock_value = 0;
@@ -425,7 +626,7 @@ void task_menu_update(void *parameters)
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_ESCAPE_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_MAIN;
+						p_task_menu_dta->state = ST_MEN_XX_MAIN_CONFIG;
 						char linea1[32];
 						char linea2[32];
 
@@ -465,7 +666,7 @@ void task_menu_update(void *parameters)
 						displayClear();
 					    displayCharPositionWrite(0, 0);
 						char linea1[32];
-						sprintf(linea1, "> BEBIDA %d", p_task_menu_dta->drink_number+1);
+						sprintf(linea1, "> DRINK %d", p_task_menu_dta->drink_number+1);
 						displayStringWrite(linea1);
 					    displayCharPositionWrite(0, 1);
 						displayStringWrite("> Stock");
@@ -481,7 +682,7 @@ void task_menu_update(void *parameters)
 						displayClear();
 					    displayCharPositionWrite(0, 0);
 						char linea1[32];
-						sprintf(linea1, "> BEBIDA %d", p_task_menu_dta->drink_number);
+						sprintf(linea1, "> DRINK %d", p_task_menu_dta->drink_number);
 						displayStringWrite(linea1);
 					    displayCharPositionWrite(0, 1);
 						displayStringWrite("> Price");
@@ -537,7 +738,7 @@ void task_menu_update(void *parameters)
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_MAIN;
+						p_task_menu_dta->state = ST_MEN_XX_MAIN_CONFIG;
 						p_task_menu_drink_dta = &task_menu_drink_dta_list[p_task_menu_dta->drink_number];
 						p_task_menu_drink_dta->price_value = p_task_menu_dta->price_value;
 						p_task_menu_dta->price_value = 0;
@@ -569,7 +770,7 @@ void task_menu_update(void *parameters)
 				default:
 
 					p_task_menu_dta->tick  = DEL_MEN_XX_MIN;
-					p_task_menu_dta->state = ST_MEN_XX_MAIN;
+					p_task_menu_dta->state = ST_MEN_XX_MAIN_CONFIG;
 					p_task_menu_dta->event = EV_MEN_OK_IDLE;
 					p_task_menu_dta->flag  = false;
 

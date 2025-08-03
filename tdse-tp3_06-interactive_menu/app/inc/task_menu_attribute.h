@@ -81,7 +81,8 @@ typedef enum task_menu_ev {EV_MEN_ENTER1_IDLE,
 
 /* State of Task Menu */
 typedef enum task_menu_st {ST_MEN_XX_DRINK,
-						   ST_MEN_XX_MAIN,
+						   ST_MEN_XX_MAIN_CONFIG,
+						   ST_MEN_XX_MAIN_USER,
 						   ST_MEN_XX_PRICE,
 						   ST_MEN_XX_SET_PRICE,
 						   ST_MEN_XX_STOCK,
@@ -96,6 +97,7 @@ typedef struct
 	int		drink_number;
 	int		stock_value;
 	int		price_value;
+	int		coins;
 
 } task_menu_dta_t;
 
