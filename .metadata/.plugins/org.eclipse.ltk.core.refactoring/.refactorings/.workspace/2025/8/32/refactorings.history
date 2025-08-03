@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;tdse-tp3_06-interactive_menu/app/src/ADC-main&apos;" deleteContents="false" description="Delete resource &apos;tdse-tp3_06-interactive_menu/app/src/ADC-main&apos;" element1="/tdse-tp3_06-interactive_menu/app/src/ADC-main" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1754196236594"/>&#x0A;<refactoring comment="Delete 2 resources" deleteContents="true" description="Delete 2 resources" element1="/ADC-main.zip_expanded" element2="/ADC" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="2" stamp="1754200668898"/>
-</session>
