@@ -65,15 +65,6 @@
 #define MAX_STOCK 99
 #define DRINK_DELIVERY_DELAY 5000
 
-// Paginas para las variables
-#define PAGE_STOCK1 0x0801F000 // Página 124
-#define PAGE_PRICE1 0x0801F400 // Página 125
-
-
-// Direccion de las variables
-#define STOCK1_ADDR (PAGE_STOCK1)
-#define PRICE1_ADDR (PAGE_PRICE1)
-
 /********************** internal data declaration ****************************/
 task_menu_dta_t task_menu_dta =
 	{DEL_MEN_XX_MIN, ST_MEN_XX_MAIN_USER, EV_MEN_OK_IDLE, false, 0, 0, 0, 0};
@@ -85,7 +76,21 @@ task_menu_drink_dta_t task_menu_drink_dta_list[] = {
 	{0, 0}
 };
 
-#define MENU_DTA_QTY	(sizeof(task_menu_dta)/sizeof(task_menu_dta_t))
+uint32_t flashPages[] = {
+    0x0801F400,
+    0x0801F000,
+    0x0801EC00,
+    0x0801E800,
+    0x0801E400,
+    0x0801E000,
+    0x0801DC00,
+    0x0801D800,
+    0x0801D400,
+    0x0801D000
+};
+
+#define MENU_DTA_QTY	(sizeof(task_menu_drink_dta_list)/sizeof(task_menu_drink_dta_t))
+#define DRINK_DTA_QTY	(sizeof(task_menu_drink_dta_list)/sizeof(task_menu_drink_dta_t))
 
 /********************** internal functions declaration ***********************/
 
@@ -111,13 +116,12 @@ void Flash_ErasePage(uint32_t pageAddress) {
     HAL_FLASH_Lock();
 }
 
-void Flash_WriteTwoVars(uint32_t pageAddress, int varA) {
+void Flash_WriteVar(uint32_t pageAddress, int var) {
 
-	Flash_ErasePage(pageAddress); // Borrar antes de escribir
+	Flash_ErasePage(pageAddress);
     HAL_FLASH_Unlock();
-    // Escribir varA
-    HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD, pageAddress,     (uint16_t)(varA & 0xFFFF));
-    HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD, pageAddress + 2, (uint16_t)((varA >> 16) & 0xFFFF));
+    HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD, pageAddress,     (uint16_t)(var & 0xFFFF));
+    HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD, pageAddress + 2, (uint16_t)((var >> 16) & 0xFFFF));
     HAL_FLASH_Lock();
 }
 
@@ -209,8 +213,10 @@ void task_menu_init(void *parameters)
 	/* Update Task Actuator Configuration & Data Pointer */
 	p_task_menu_dta = &task_menu_dta;
 
-	task_menu_drink_dta_list[0].stock_value = Flash_ReadVar(STOCK1_ADDR);
-	task_menu_drink_dta_list[0].price_value = Flash_ReadVar(PRICE1_ADDR);
+	for (int i = 0; i < DRINK_DTA_QTY; i++) {
+	    task_menu_drink_dta_list[i].stock_value = Flash_ReadVar(flashPages[2 * i]);
+	    task_menu_drink_dta_list[i].price_value = Flash_ReadVar(flashPages[2 * i + 1]);
+	}
 
 	/* Print out: Task execution FSM */
 	state = p_task_menu_dta->state;
@@ -394,6 +400,7 @@ void task_menu_update(void *parameters)
 						if (p_task_menu_dta->coins >= task_menu_drink_dta_list[p_task_menu_dta->drink_number].price_value && task_menu_drink_dta_list[p_task_menu_dta->drink_number].stock_value > 0) {
 							p_task_menu_dta->coins = p_task_menu_dta->coins - task_menu_drink_dta_list[p_task_menu_dta->drink_number].price_value;
 							task_menu_drink_dta_list[p_task_menu_dta->drink_number].stock_value--;
+							Flash_WriteVar(flashPages[(p_task_menu_dta->drink_number)*2], task_menu_drink_dta_list[p_task_menu_dta->drink_number].stock_value);
 							p_task_menu_dta->state = ST_MEN_XX_MAIN_USER;
 							displayClear();
 						    displayCharPositionWrite(0, 0);
@@ -579,9 +586,9 @@ void task_menu_update(void *parameters)
 						p_task_menu_dta->state = ST_MEN_XX_MAIN_CONFIG;
 						p_task_menu_drink_dta = &task_menu_drink_dta_list[p_task_menu_dta->drink_number];
 						p_task_menu_drink_dta->stock_value = p_task_menu_dta->stock_value;
+						Flash_WriteVar(flashPages[(p_task_menu_dta->drink_number)*2], p_task_menu_dta->stock_value);
 						p_task_menu_dta->stock_value = 0;
 						p_task_menu_dta->drink_number = 0;
-						Flash_WriteTwoVars(PAGE_STOCK1, p_task_menu_drink_dta->stock_value);
 						writeConfigMainText();
 					}
 
@@ -676,13 +683,16 @@ void task_menu_update(void *parameters)
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_OK_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
-						p_task_menu_dta->state = ST_MEN_XX_MAIN_CONFIG;
-						p_task_menu_drink_dta = &task_menu_drink_dta_list[p_task_menu_dta->drink_number];
-						p_task_menu_drink_dta->price_value = p_task_menu_dta->price_value;
-						p_task_menu_dta->price_value = 0;
-						p_task_menu_dta->drink_number = 0;
-						Flash_WriteTwoVars(PAGE_PRICE1, p_task_menu_drink_dta->price_value);
-						writeConfigMainText();
+
+						if(p_task_menu_dta->price_value > 0 ){
+							p_task_menu_dta->state = ST_MEN_XX_MAIN_CONFIG;
+							p_task_menu_drink_dta = &task_menu_drink_dta_list[p_task_menu_dta->drink_number];
+							p_task_menu_drink_dta->price_value = p_task_menu_dta->price_value;
+							Flash_WriteVar(flashPages[((p_task_menu_dta->drink_number)*2)+1], p_task_menu_dta->price_value);
+							p_task_menu_dta->price_value = 0;
+							p_task_menu_dta->drink_number = 0;
+							writeConfigMainText();
+						}
 					}
 
 					break;
