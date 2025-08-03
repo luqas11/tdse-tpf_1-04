@@ -198,7 +198,7 @@ static void MX_ADC1_Init(void)
 
   /** Configure Regular Channel
   */
-  sConfig.Channel = ADC_CHANNEL_10;
+  sConfig.Channel = ADC_CHANNEL_0;
   sConfig.Rank = ADC_REGULAR_RANK_1;
   sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
@@ -238,14 +238,14 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(D9_GPIO_Port, D9_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : A4_Pin C_Pin ESCAPE_Pin */
-  GPIO_InitStruct.Pin = A4_Pin|C_Pin|ESCAPE_Pin;
+  /*Configure GPIO pins : A5_Pin A4_Pin C_Pin ESCAPE_Pin */
+  GPIO_InitStruct.Pin = A5_Pin|A4_Pin|C_Pin|ESCAPE_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : A0_Pin A1_Pin A2_Pin COIN_Pin */
-  GPIO_InitStruct.Pin = A0_Pin|A1_Pin|A2_Pin|COIN_Pin;
+  /*Configure GPIO pins : A1_Pin A2_Pin COIN_Pin */
+  GPIO_InitStruct.Pin = A1_Pin|A2_Pin|COIN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
