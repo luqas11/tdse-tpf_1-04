@@ -64,15 +64,25 @@
 #define MAX_PRICE 9
 #define MAX_STOCK 99
 #define DRINK_DELIVERY_DELAY 5000
+
+// Paginas para las variables
+#define PAGE_STOCK1 0x0801F000 // Página 124
+#define PAGE_PRICE1 0x0801F400 // Página 125
+
+
+// Direccion de las variables
+#define STOCK1_ADDR (PAGE_STOCK1)
+#define PRICE1_ADDR (PAGE_PRICE1)
+
 /********************** internal data declaration ****************************/
 task_menu_dta_t task_menu_dta =
 	{DEL_MEN_XX_MIN, ST_MEN_XX_MAIN_USER, EV_MEN_OK_IDLE, false, 0, 0, 0, 0};
 
 task_menu_drink_dta_t task_menu_drink_dta_list[] = {
-	{17, 4},
-	{12, 9},
-	{8, 2},
-	{20, 3}
+	{0, 0},
+	{0, 0},
+	{0, 0},
+	{0, 0}
 };
 
 #define MENU_DTA_QTY	(sizeof(task_menu_dta)/sizeof(task_menu_dta_t))
@@ -88,6 +98,32 @@ uint32_t g_task_menu_cnt;
 volatile uint32_t g_task_menu_tick_cnt;
 
 /********************** external functions definition ************************/
+
+void Flash_ErasePage(uint32_t pageAddress) {
+
+	HAL_FLASH_Unlock();
+    FLASH_EraseInitTypeDef EraseInitStruct;
+    uint32_t PageError;
+    EraseInitStruct.TypeErase = FLASH_TYPEERASE_PAGES;
+    EraseInitStruct.PageAddress = pageAddress;
+    EraseInitStruct.NbPages = 1;
+    HAL_FLASHEx_Erase(&EraseInitStruct, &PageError);
+    HAL_FLASH_Lock();
+}
+
+void Flash_WriteTwoVars(uint32_t pageAddress, int varA) {
+
+	Flash_ErasePage(pageAddress); // Borrar antes de escribir
+    HAL_FLASH_Unlock();
+    // Escribir varA
+    HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD, pageAddress,     (uint16_t)(varA & 0xFFFF));
+    HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD, pageAddress + 2, (uint16_t)((varA >> 16) & 0xFFFF));
+    HAL_FLASH_Lock();
+}
+
+int Flash_ReadVar(uint32_t address) {
+    return *(int*)address;
+}
 
 void writeUserMainText(int coins){
 	displayClear();
@@ -172,6 +208,9 @@ void task_menu_init(void *parameters)
 
 	/* Update Task Actuator Configuration & Data Pointer */
 	p_task_menu_dta = &task_menu_dta;
+
+	task_menu_drink_dta_list[0].stock_value = Flash_ReadVar(STOCK1_ADDR);
+	task_menu_drink_dta_list[0].price_value = Flash_ReadVar(PRICE1_ADDR);
 
 	/* Print out: Task execution FSM */
 	state = p_task_menu_dta->state;
@@ -542,6 +581,7 @@ void task_menu_update(void *parameters)
 						p_task_menu_drink_dta->stock_value = p_task_menu_dta->stock_value;
 						p_task_menu_dta->stock_value = 0;
 						p_task_menu_dta->drink_number = 0;
+						Flash_WriteTwoVars(PAGE_STOCK1, p_task_menu_drink_dta->stock_value);
 						writeConfigMainText();
 					}
 
@@ -641,6 +681,7 @@ void task_menu_update(void *parameters)
 						p_task_menu_drink_dta->price_value = p_task_menu_dta->price_value;
 						p_task_menu_dta->price_value = 0;
 						p_task_menu_dta->drink_number = 0;
+						Flash_WriteTwoVars(PAGE_PRICE1, p_task_menu_drink_dta->price_value);
 						writeConfigMainText();
 					}
 
