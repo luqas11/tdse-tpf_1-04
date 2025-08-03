@@ -75,9 +75,6 @@ task_menu_drink_dta_t task_menu_drink_dta_list[] = {
 	{20, 3}
 };
 
-extern ADC_HandleTypeDef hadc1;
-HAL_StatusTypeDef ADC_Poll_Read(uint16_t *value);
-
 #define MENU_DTA_QTY	(sizeof(task_menu_dta)/sizeof(task_menu_dta_t))
 
 /********************** internal functions declaration ***********************/
@@ -91,18 +88,6 @@ uint32_t g_task_menu_cnt;
 volatile uint32_t g_task_menu_tick_cnt;
 
 /********************** external functions definition ************************/
-HAL_StatusTypeDef ADC_Poll_Read(uint16_t *value) {
-	HAL_StatusTypeDef res;
-
-	res=HAL_ADC_Start(&hadc1);
-	if ( HAL_OK==res ) {
-		res=HAL_ADC_PollForConversion(&hadc1, 0);
-		if ( HAL_OK==res ) {
-			*value = HAL_ADC_GetValue(&hadc1);
-		}
-	}
-	return res;
-}
 
 void writeUserMainText(int coins){
 	displayClear();
@@ -117,13 +102,13 @@ void writeUserMainText(int coins){
 void writeConfigMainText(){
 	char line1[32];
 	char line2[32];
-	sprintf(line1, "Stocks: %d,%d,%d,%d",
+	sprintf(line1, "Stock: %d,%d,%d,%d",
 			task_menu_drink_dta_list[0].stock_value,
 			task_menu_drink_dta_list[1].stock_value,
 			task_menu_drink_dta_list[2].stock_value,
 			task_menu_drink_dta_list[3].stock_value);
 
-	sprintf(line2, "Prices: %d,%d,%d,%d",
+	sprintf(line2, "Price: %d,%d,%d,%d",
 			task_menu_drink_dta_list[0].price_value,
 			task_menu_drink_dta_list[1].price_value,
 			task_menu_drink_dta_list[2].price_value,
@@ -263,6 +248,15 @@ void task_menu_update(void *parameters)
 			{
 
 				case ST_MEN_XX_MAIN_USER:
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_TEMP_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_ERROR;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						displayStringWrite("> TEMP ERROR");
+					}
+
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_MODE_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
@@ -322,7 +316,25 @@ void task_menu_update(void *parameters)
 
 					break;
 
+				case ST_MEN_XX_ERROR:
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_TEMP_IDLE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_MAIN_USER;
+						writeUserMainText(p_task_menu_dta->coins);
+					}
+
+					break;
 				case ST_MEN_XX_DRINK:
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_TEMP_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_ERROR;
+						p_task_menu_dta->drink_number = 0;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						displayStringWrite("> TEMP ERROR");
+					}
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_MODE_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
@@ -385,15 +397,14 @@ void task_menu_update(void *parameters)
 
 				case ST_MEN_XX_MAIN_CONFIG:
 
-					if ((true == p_task_menu_dta->flag) && (EV_MEN_COIN_ACTIVE == p_task_menu_dta->event)){
-
-						uint16_t value;
-						if (HAL_OK==ADC_Poll_Read(&value)) {
-							LOGGER_LOG("%u\n", value * 80);
-						}
-
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_TEMP_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_ERROR;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						displayStringWrite("> TEMP ERROR");
 					}
-
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_ENTER1_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
@@ -437,6 +448,15 @@ void task_menu_update(void *parameters)
 
 				case ST_MEN_XX_STOCK:
 
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_TEMP_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_ERROR;
+						p_task_menu_dta->drink_number = 0;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						displayStringWrite("> TEMP ERROR");
+					}
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_MODE_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
@@ -468,6 +488,16 @@ void task_menu_update(void *parameters)
 
 				case ST_MEN_XX_SET_STOCK:
 
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_TEMP_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_ERROR;
+						p_task_menu_dta->drink_number = 0;
+						p_task_menu_dta->stock_value = 0;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						displayStringWrite("> TEMP ERROR");
+					}
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_MODE_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
@@ -521,12 +551,21 @@ void task_menu_update(void *parameters)
 					break;
 
 				case ST_MEN_XX_PRICE:
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_TEMP_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_ERROR;
+						p_task_menu_dta->drink_number = 0;
+						p_task_menu_dta->stock_value = 0;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						displayStringWrite("> TEMP ERROR");
+					}
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_MODE_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						p_task_menu_dta->state = ST_MEN_XX_MAIN_USER;
 						p_task_menu_dta->drink_number = 0;
-						p_task_menu_dta->stock_value = 0;
 						writeUserMainText(p_task_menu_dta->coins);
 					}
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_ESCAPE_ACTIVE == p_task_menu_dta->event))
@@ -552,12 +591,22 @@ void task_menu_update(void *parameters)
 					break;
 
 				case ST_MEN_XX_SET_PRICE:
+					if ((true == p_task_menu_dta->flag) && (EV_MEN_TEMP_ACTIVE == p_task_menu_dta->event))
+					{
+						p_task_menu_dta->flag = false;
+						p_task_menu_dta->state = ST_MEN_XX_ERROR;
+						p_task_menu_dta->drink_number = 0;
+						p_task_menu_dta->price_value = 0;
+						displayClear();
+					    displayCharPositionWrite(0, 0);
+						displayStringWrite("> TEMP ERROR");
+					}
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_MODE_ACTIVE == p_task_menu_dta->event))
 					{
 						p_task_menu_dta->flag = false;
 						p_task_menu_dta->state = ST_MEN_XX_MAIN_USER;
 						p_task_menu_dta->drink_number = 0;
-						p_task_menu_dta->stock_value = 0;
+						p_task_menu_dta->price_value = 0;
 						writeUserMainText(p_task_menu_dta->coins);
 					}
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_ESCAPE_ACTIVE == p_task_menu_dta->event))

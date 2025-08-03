@@ -59,6 +59,11 @@
 #define DEL_BTN_XX_MED				25ul
 #define DEL_BTN_XX_MAX				50ul
 
+#define DEL_ADC_XX_MIN				0ul
+#define DEL_ADC_XX_MAX				500ul
+
+#define TEMP_THRESHOLD				800
+
 /********************** internal data declaration ****************************/
 const task_sensor_cfg_t task_sensor_cfg_list[] = {
 	{ID_BTN_ENTER1,  BTN_ENTER1_PORT,  BTN_ENTER1_PIN,  BTN_ENTER1_PRESSED, DEL_BTN_XX_MAX,
@@ -77,6 +82,8 @@ const task_sensor_cfg_t task_sensor_cfg_list[] = {
 	 EV_MEN_ESCAPE_IDLE,  EV_MEN_ESCAPE_ACTIVE},
 	{ID_BTN_COIN,  BTN_COIN_PORT,  BTN_COIN_PIN,  BTN_COIN_PRESSED, DEL_BTN_XX_MAX,
 	 EV_MEN_COIN_IDLE,  EV_MEN_COIN_ACTIVE},
+	{ID_ADC_TEMP,  0,  0,  0, DEL_BTN_XX_MAX,
+	 EV_MEN_TEMP_IDLE,  EV_MEN_TEMP_ACTIVE, true, DEL_ADC_XX_MAX},
 };
 
 #define SENSOR_CFG_QTY	(sizeof(task_sensor_cfg_list)/sizeof(task_sensor_cfg_t))
@@ -89,10 +96,13 @@ task_sensor_dta_t task_sensor_dta_list[] = {
 	{DEL_BTN_XX_MIN, ST_BTN_XX_UP, EV_BTN_XX_UP},
 	{DEL_BTN_XX_MIN, ST_BTN_XX_UP, EV_BTN_XX_UP},
 	{DEL_BTN_XX_MIN, ST_BTN_XX_UP, EV_BTN_XX_UP},
+	{DEL_BTN_XX_MIN, ST_BTN_XX_UP, EV_BTN_XX_UP},
 	{DEL_BTN_XX_MIN, ST_BTN_XX_UP, EV_BTN_XX_UP}
 };
 
 #define SENSOR_DTA_QTY	(sizeof(task_sensor_dta_list)/sizeof(task_sensor_dta_t))
+
+extern ADC_HandleTypeDef hadc1;
 
 /********************** internal functions declaration ***********************/
 
@@ -105,6 +115,19 @@ uint32_t g_task_sensor_cnt;
 volatile uint32_t g_task_sensor_tick_cnt;
 
 /********************** external functions definition ************************/
+HAL_StatusTypeDef ADC_Poll_Read(uint16_t *value) {
+	HAL_StatusTypeDef res;
+
+	res=HAL_ADC_Start(&hadc1);
+	if ( HAL_OK==res ) {
+		res=HAL_ADC_PollForConversion(&hadc1, 0);
+		if ( HAL_OK==res ) {
+			*value = HAL_ADC_GetValue(&hadc1);
+		}
+	}
+	return res;
+}
+
 void task_sensor_init(void *parameters)
 {
 	uint32_t index;
@@ -178,13 +201,29 @@ void task_sensor_update(void *parameters)
 			p_task_sensor_cfg = &task_sensor_cfg_list[index];
 			p_task_sensor_dta = &task_sensor_dta_list[index];
 
-			if (p_task_sensor_cfg->pressed == HAL_GPIO_ReadPin(p_task_sensor_cfg->gpio_port, p_task_sensor_cfg->pin))
-			{
-				p_task_sensor_dta->event =	EV_BTN_XX_DOWN;
-			}
-			else
-			{
-				p_task_sensor_dta->event =	EV_BTN_XX_UP;
+			if (p_task_sensor_cfg->is_adc == false){
+				if (p_task_sensor_cfg->pressed == HAL_GPIO_ReadPin(p_task_sensor_cfg->gpio_port, p_task_sensor_cfg->pin))
+				{
+					p_task_sensor_dta->event =	EV_BTN_XX_DOWN;
+				}
+				else
+				{
+					p_task_sensor_dta->event =	EV_BTN_XX_UP;
+				}
+			} else {
+				if (p_task_sensor_dta->adc_tick == DEL_ADC_XX_MIN) {
+					uint16_t value;
+					if (HAL_OK==ADC_Poll_Read(&value)) {
+						LOGGER_LOG("ADC value: %u\n", value);
+						if (value > TEMP_THRESHOLD) {
+							p_task_sensor_dta->event = EV_BTN_XX_DOWN;
+						} else {
+							p_task_sensor_dta->event = EV_BTN_XX_UP;
+						}
+					}
+					p_task_sensor_dta->adc_tick = p_task_sensor_cfg->adc_tick_max;
+				}
+				p_task_sensor_dta->adc_tick--;
 			}
 
 			switch (p_task_sensor_dta->state)

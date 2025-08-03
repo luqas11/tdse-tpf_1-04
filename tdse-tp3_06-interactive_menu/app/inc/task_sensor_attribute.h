@@ -99,7 +99,8 @@ typedef enum task_sensor_id {ID_BTN_ENTER1,
 							 ID_BTN_MODE,
 							 ID_BTN_OK,
 							 ID_BTN_ESCAPE,
-							 ID_BTN_COIN} task_sensor_id_t;
+							 ID_BTN_COIN,
+							 ID_ADC_TEMP} task_sensor_id_t;
 
 typedef struct
 {
@@ -110,6 +111,8 @@ typedef struct
 	uint32_t			tick_max;
 	task_sensor_ev_t	signal_up;
 	task_sensor_ev_t	signal_down;
+	bool				is_adc;
+	uint32_t			adc_tick_max;
 } task_sensor_cfg_t;
 
 typedef struct
@@ -117,6 +120,7 @@ typedef struct
 	uint32_t			tick;
 	task_sensor_st_t	state;
 	task_sensor_ev_t	event;
+	uint32_t			adc_tick;
 } task_sensor_dta_t;
 
 /********************** external data declaration ****************************/
