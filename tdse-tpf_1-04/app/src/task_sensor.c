@@ -62,7 +62,7 @@
 #define DEL_ADC_XX_MIN				0ul
 #define DEL_ADC_XX_MAX				500ul
 
-#define TEMP_THRESHOLD				800
+#define TEMP_THRESHOLD				600
 
 /********************** internal data declaration ****************************/
 const task_sensor_cfg_t task_sensor_cfg_list[] = {
