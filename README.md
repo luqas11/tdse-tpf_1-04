@@ -1,4 +1,5 @@
-# tdse-tpf_1-04
+# Proyecto final
+Este proyecto es el diseño de software y hardware para un sistema de control de una máquina expendedora de bebidas.
 
 #### Para depurar el proyecto, se deben realizar las siguientes configuraciones en el STM32CubeIDE:
 1. Run -> Debug configurations -> Debugger -> Debug Probe -> ST-LINK (OpenOCD) -> Apply
